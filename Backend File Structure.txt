@@ -1,0 +1,78 @@
+/trend-forge
+├── /frontend                   # Static frontend files (HTML, CSS, JS)
+├── index.html
+├── 404.html
+├── about.html
+├── subscribe.html
+├── world.html
+├── search.html
+├── business.html
+├── finance.html
+├── science.html
+├── culture.html
+├── contact.html
+├── privacy.html
+├── terms.html
+├── splash.html
+├── splash.js
+├── world
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
+├── business.html
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
+├── finance.html
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
+├── science.html
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
+├── culture.html
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
+├── /backend                   # Backend application
+│   ├── /config                # Configuration files
+│   │   ├── database.js        # Database connection setup (PostgreSQL)
+│   │   ├── env.js             # Environment variable parsing (.env)
+│   │   ├── pi-network.js      # Pi Network API configuration
+│   ├── /controllers           # Request handlers for API endpoints
+│   │   ├── contact.js         # Handle contact form submissions
+│   │   ├── search.js          # Handle search queries
+│   │   ├── subscription.js    # Handle subscription payments (Pi Network)
+│   │   ├── article.js         # Handle article retrieval and premium access
+│   ├── /middleware            # Middleware for authentication, validation
+│   │   ├── auth.js            # JWT authentication for premium content
+│   │   ├── validate.js        # Input validation (e.g., contact form, search)
+│   │   ├── error.js           # Centralized error handling
+│   ├── /models                # Database models (PostgreSQL schemas)
+│   │   ├── user.js            # User model (email, subscription status)
+│   │   ├── contact.js         # Contact form submission model
+│   │   ├── article.js         # Article model (title, content, premium)
+│   ├── /routes                # API route definitions
+│   │   ├── contact.js         # POST /api/contact
+│   │   ├── search.js          # GET /api/search
+│   │   ├── subscription.js    # POST /api/subscribe, GET /api/subscribe/status
+│   │   ├── article.js         # GET /api/articles, GET /api/articles/:id
+│   │   ├── index.js           # Root router to combine all routes
+│   ├── /services              # Business logic and external integrations
+│   │   ├── email.js           # Send email notifications (e.g., contact form)
+│   │   ├── pi-network.js      # Pi Network payment processing
+│   │   ├── search.js          # Search engine logic (e.g., full-text search)
+│   ├── /utils                 # Utility functions
+│   │   ├── logger.js          # Logging (e.g., Winston)
+│   │   ├── response.js        # Standardized API response formatting
+│   ├── /tests                 # Unit and integration tests
+│   │   ├── contact.test.js    # Tests for contact form
+│   │   ├── search.test.js     # Tests for search functionality
+│   │   ├── subscription.test.js # Tests for subscription processing
+│   ├── server.js              # Main application entry point
+│   ├── package.json           # Node.js dependencies and scripts
+│   ├── .env                   # Environment variables (not committed)
+│   ├── Dockerfile             # Docker configuration for deployment
+│   ├── .gitignore             # Git ignore file
+├── README.md                  # Project documentation
