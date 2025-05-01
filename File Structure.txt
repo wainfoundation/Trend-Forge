@@ -1,0 +1,36 @@
+/root
+├── index.html
+├── 404.html
+├── about.html
+├── subscribe.html
+├── world.html
+├── search.html
+├── business.html
+├── finance.html
+├── science.html
+├── culture.html
+├── contact.html
+├── privacy.html
+├── terms.html
+├── splash.html
+├── splash.js
+├── world
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
+├── business.html
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
+├── finance.html
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
+├── science.html
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
+├── culture.html
+│   ├── article1.html
+│   ├── article2.html
+│   ├── article3.html
