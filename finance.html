@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance News - Trend Forge</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts to mimic Economist's typography -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto Slab', serif;
+        }
+        .economist-red {
+            background-color: #e3120b; /* Economist's signature red */
+        }
+        .economist-red-text {
+            color: #e3120b;
+        }
+        .premium-icon::before {
+            content: '🔒 ';
+            color: #e3120b;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-6">
+                <h1 class="text-3xl font-bold economist-red-text"><a href="index.html">Trend Forge</a></h1>
+                <div class="hidden md:flex space-x-6">
+                    <a href="world.html" class="text-gray-800 hover:economist-red-text font-medium">World</a>
+                    <a href="business.html" class="text-gray-800 hover:economist-red-text font-medium">Business</a>
+                    <a href="finance.html" class="text-gray-800 hover:economist-red-text font-medium">Finance</a>
+                    <a href="science.html" class="text-gray-800 hover:economist-red-text font-medium">Science</a>
+                    <a href="culture.html" class="text-gray-800 hover:economist-red-text font-medium">Culture</a>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">
+                    <a href="search.html"><i class="fas fa-search mr-2"></i>Search</a>
+                </button>
+                <button class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
+                    <a href="subscribe.html">Subscribe</a>
+                </button>
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-800 text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Featured Finance News -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold economist-red-text mb-6">Finance News</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Main Feature -->
+                <div class="md:col-span-2 bg-white border border-gray-200">
+                    <img src="https://picsum.photos/800/400?random=20" alt="Main Feature" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <span class="economist-red-text text-sm font-semibold uppercase">Markets</span>
+                        <h3 class="text-2xl font-bold mt-2 hover:economist-red-text cursor-pointer">
+                            <a href="finance/article1.html">Markets Rally Amid Policy Shifts</a>
+                        </h3>
+                        <p class="text-gray-600 mt-2">
+                            Central banks signal bold moves, boosting investor confidence...
+                        </p>
+                        <div class="mt-4 flex items-center justify-between">
+                            <span class="text-sm text-gray-500">2 hours ago</span>
+                            <span class="premium-icon text-sm font-semibold">Premium</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Secondary Features -->
+                <div class="space-y-4">
+                    <div class="bg-white border border-gray-200 p-4">
+                        <span class="economist-red-text text-sm font-semibold uppercase">Cryptocurrency</span>
+                        <h3 class="font-semibold mt-2 hover:economist-red-text cursor-pointer">
+                            <a href="finance/article2.html">Crypto Markets Stabilize</a>
+                        </h3>
+                        <p class="text-gray-600 text-sm mt-2">
+                            Bitcoin and Ethereum show resilience amid regulatory clarity...
+                        </p>
+                    </div>
+                    <div class="bg-white border border-gray-200 p-4">
+                        <span class="economist-red-text text-sm font-semibold uppercase">Bonds</span>
+                        <h3 class="font-semibold mt-2 hover:economist-red-text cursor-pointer">
+                            <a href="finance/article3.html">Bond Yields Surge</a>
+                        </h3>
+                        <p class="text-gray-600 text-sm mt-2">
+                            Investors brace for higher rates as inflation persists...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Finance News Grid -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Article 1 -->
+            <div class="bg-white border border-gray-200 p-4">
+                <h3 class="font-semibold hover:economist-red-text cursor-pointer">
+                    <a href="finance/article4.html">Hedge Funds Bet on Emerging Markets</a>
+                </h3>
+                <p class="text-gray-600 text-sm mt-2">
+                    Investors seek opportunities in developing economies...
+                </p>
+                <div class="mt-4 flex items-center justify-between">
+                    <span class="text-sm text-gray-500">4 hours ago</span>
+                    <span class="premium-icon text-sm font-semibold">Premium</span>
+                </div>
+            </div>
+            <!-- Article 2 -->
+            <div class="bg-white border border-gray-200 p-4">
+                <h3 class="font-semibold hover:economist-red-text cursor-pointer">
+                    <a href="finance/article5.html">Central Banks Tighten Monetary Policy</a>
+                </h3>
+                <p class="text-gray-600 text-sm mt-2">
+                    Rate hikes signal a shift in global financial strategy...
+                </p>
+                <div class="mt-4 flex items-center justify-between">
+                    <span class="text-sm text-gray-500">6 hours ago</span>
+                </div>
+            </div>
+            <!-- Article 3 -->
+            <div class="bg-white border border-gray-200 p-4">
+                <h3 class="font-semibold hover:economist-red-text cursor-pointer">
+                    <a href="finance/article6.html">Fintech Disrupts Traditional Banking</a>
+                </h3>
+                <p class="text-gray-600 text-sm mt-2">
+                    Digital platforms challenge established financial institutions...
+                </p>
+                <div class="mt-4 flex items-center justify-between">
+                    <span class="text-sm text-gray-500">8 hours ago</span>
+                </div>
+            </div>
+            <!-- Article 4 -->
+            <div class="bg-white border border-gray-200 p-4">
+                <h3 class="font-semibold hover:economist-red-text cursor-pointer">
+                    <a href="finance/article7.html">Commodities Markets Face Volatility</a>
+                </h3>
+                <p class="text-gray-600 text-sm mt-2">
+                    Oil and metal prices fluctuate amid geopolitical tensions...
+                </p>
+                <div class="mt-4 flex items-center justify-between">
+                    <span class="text-sm text-gray-500">10 hours ago</span>
+                    <span class="premium-icon text-sm font-semibold">Premium</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Trend Forge</h3>
+                    <p class="text-gray-400">In-depth analysis and global insights to keep you informed.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Sections</h3>
+                    <ul class="space-y-2">
+                        <li><a href="world.html" class="text-gray-400 hover:economist-red-text">World</a></li>
+                        <li><a href="business.html" class="text-gray-400 hover:economist-red-text">Business</a></li>
+                        <li><a href="finance.html" class="text-gray-400 hover:economist-red-text">Finance</a></li>
+                        <li><a href="science.html" class="text-gray-400 hover:economist-red-text">Science</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-400 hover:economist-red-text">Our Mission</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:economist-red-text">Contact Us</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:economist-red-text">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:economist-red-text">Terms</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://twitter.com/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="https://
+
+linkedin.com/company/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>© 2025 Trend Forge. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden" id="mobile-menu">
+        <div class="bg-white h-full w-64 p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-xl font-bold economist-red-text">Menu</h2>
+                <button class="text-gray-800" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="space-y-4">
+                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium">World</a>
+                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium">Business</a>
+                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium">Finance</a>
+                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium">Science</a>
+                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium">Culture</a>
+                <a href="subscribe.html" class="block economist-red-text font-medium">Subscribe</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        document.querySelector('.fa-bars').parentElement.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
