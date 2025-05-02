@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trend Forge Update - Global Insights</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
         body {
@@ -19,7 +16,7 @@
             font-family: 'Roboto Slab', serif;
         }
         .economist-red {
-            background-color: #e3120b; /* Economist's signature red */
+            background-color: #e3120b;
         }
         .economist-red-text {
             color: #e3120b;
@@ -28,7 +25,6 @@
             content: '🔒 ';
             color: #e3120b;
         }
-        /* Mobile Menu Styles */
         #mobile-menu {
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
@@ -43,16 +39,14 @@
             background-color: #f5f5f5;
             color: #e3120b;
         }
-        /* Ensure touch-friendly buttons */
         .menu-item {
-            min-height: 44px; /* Minimum touch target size */
+            min-height: 44px;
             display: flex;
             align-items: center;
         }
     </style>
 </head>
 <body class="bg-white">
-    <!-- Header -->
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center space-x-6">
@@ -79,13 +73,10 @@
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
-        <!-- Featured Section -->
         <section class="mb-12">
             <h2 class="text-2xl font-bold economist-red-text mb-6">The Big Story</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Main Feature -->
                 <div class="md:col-span-2 bg-white border border-gray-200">
                     <img src="https://picsum.photos/800/400" alt="Main Feature" class="w-full h-64 object-cover">
                     <div class="p-6">
@@ -98,7 +89,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Secondary Features -->
                 <div class="space-y-4">
                     <div class="bg-white border border-gray-200 p-4">
                         <span class="economist-red-text text-sm font-semibold uppercase">Finance</span>
@@ -114,9 +104,7 @@
             </div>
         </section>
 
-        <!-- Categories Grid -->
         <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Business Section -->
             <div>
                 <h2 class="text-xl font-bold economist-red-text mb-4"><a href="business.html">Business</a></h2>
                 <div class="space-y-4">
@@ -130,8 +118,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Finance Section -->
             <div>
                 <h2 class="text-xl font-bold economist-red-text mb-4"><a href="finance.html">Finance</a></h2>
                 <div class="space-y-4">
@@ -145,8 +131,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Science Section -->
             <div>
                 <h2 class="text-xl font-bold economist-red-text mb-4"><a href="science.html">Science</a></h2>
                 <div class="space-y-4">
@@ -160,8 +144,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Culture Section -->
             <div>
                 <h2 class="text-xl font-bold economist-red-text mb-4"><a href="culture.html">Culture</a></h2>
                 <div class="space-y-4">
@@ -178,25 +160,18 @@
         </section>
     </main>
 
-    <!-- Enhanced Footer -->
     <footer class="bg-black text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Branding Section -->
                 <div>
-                    <h3 class="text-2xl font-bold mb-4 economist-red-text">
-                        <a href="index.html">Trend Forge</a>
-                    </h3>
-                    <p class="text-gray-300 mb-4">
-                        Global insights, powered by <a href="pinetwork.html" class="economist-red-text hover:underline">Pi Network</a>.
-                    </p>
+                    <h3 class="text-2xl font-bold mb-4 economist-red-text"><a href="index.html">Trend Forge</a></h3>
+                    <p class="text-gray-300 mb-4">Global insights, powered by <a href="pinetwork.html" class="economist-red-text hover:underline">Pi Network</a>.</p>
                     <div class="flex space-x-4">
                         <a href="subscribe.html" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 inline-flex items-center">
                             <i class="fas fa-arrow-right mr-2"></i> Subscribe Now
                         </a>
                     </div>
                 </div>
-                <!-- Explore Section -->
                 <div>
                     <h3 class="text-xl font-bold mb-4 text-gray-100">Explore</h3>
                     <ul class="space-y-2 mb-4">
@@ -215,7 +190,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- Support Section -->
                 <div>
                     <h3 class="text-xl font-bold mb-4 text-gray-100">Support</h3>
                     <div class="space-y-4">
@@ -246,10 +220,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- Connect Section -->
                 <div>
                     <h3 class="text-xl font-bold mb-4 text-gray-100">Connect</h3>
-                    <!-- Newsletter Signup -->
                     <form class="mb-6 flex space-x-2" aria-label="Newsletter Signup">
                         <label for="email" class="sr-only">Email address</label>
                         <input type="email" id="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none" required>
@@ -257,30 +229,22 @@
                             <i class="fas fa-envelope"></i>
                         </button>
                     </form>
-                    <!-- Social Media -->
                     <div class="flex space-x-4 mb-6">
                         <a href="https://twitter.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="https://facebook.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                         <a href="https://linkedin.com/company/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         <a href="https://instagram.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
-                    <!-- Contact Info -->
-                    <p class="text-gray-300">
-                        <i class="fas fa-envelope mr-2"></i> <a href="mailto:contact@trendforge.com" class="hover:economist-red-text">contact@trendforge.com</a>
-                    </p>
-                    <p class="text-gray-300 mt-2">
-                        <i class="fas fa-map-marker-alt mr-2"></i> 123 Global News Ave, World City
-                    </p>
+                    <p class="text-gray-300"><i class="fas fa-envelope mr-2"></i> <a href="mailto:contact@trendforge.com" class="hover:economist-red-text">contact@trendforge.com</a></p>
+                    <p class="text-gray-300 mt-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Global News Ave, World City</p>
                 </div>
             </div>
-            <!-- Copyright -->
             <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
                 <p>© 2025 Trend Forge. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Enhanced Mobile Menu -->
     <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden z-50" id="mobile-menu" aria-hidden="true">
         <div class="bg-white h-full w-80 p-6 shadow-lg">
             <div class="flex justify-between items-center mb-8">
@@ -290,22 +254,20 @@
                 </button>
             </div>
             <nav class="space-y-2" role="navigation" aria-label="Mobile navigation">
+                <a href="index.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Home</a>
                 <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">World</a>
                 <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Business</a>
                 <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Finance</a>
                 <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Science</a>
                 <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Culture</a>
                 <a href="subscribe.html" class="block economist-red-text font-medium py-2 px-4 rounded-md menu-item">Subscribe</a>
-                <!-- Pi SDK Login Button -->
-                <button id="pi-login" class="w-full text-left economist-red-text font-medium py-2 px-4 rounded-md menu-item">
-                    <i class="fas fa-sign-in-alt mr-2"></i> Login with Pi
-                </button>
-                <!-- Pi SDK Payment Button -->
                 <button id="pi-payment" class="w-full text-left economist-red-text font-medium py-2 px-4 rounded-md menu-item">
                     <i class="fas fa-money-bill-wave mr-2"></i> Make Payment
                 </button>
+                <button id="logout" class="w-full text-left economist-red-text font-medium py-2 px-4 rounded-md menu-item">
+                    <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                </button>
             </nav>
-            <!-- Search Bar -->
             <div class="mt-6">
                 <form class="flex space-x-2" action="search.html" aria-label="Mobile search">
                     <input type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300" aria-label="Search input">
@@ -314,7 +276,6 @@
                     </button>
                 </form>
             </div>
-            <!-- Social Media Links -->
             <div class="mt-6 flex space-x-4">
                 <a href="https://twitter.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
                 <a href="https://facebook.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Facebook"><i class="fab fa-facebook text-xl"></i></a>
@@ -324,30 +285,26 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
-        // Check if Pi SDK is available
         function isPiSDKAvailable() {
             return typeof Pi !== 'undefined';
         }
 
-        // Initialize Pi SDK
         if (isPiSDKAvailable()) {
             Pi.init({ version: "2.0", sandbox: true });
         } else {
             console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
-            alert('Please open this page in the Pi Network app to use Pi features.');
+            alert('Please open this page in the Pi Network app to access Trend Forge.');
+            window.location.href = 'https://minepi.com/';
         }
 
-        // Configure Axios client
         const axiosClient = axios.create({
-            baseURL: '/', // Adjust base URL as needed
+            baseURL: '/',
             headers: {
                 'Content-Type': 'application/json'
-                // Add authentication headers if needed
             }
         });
         const config = {
@@ -356,7 +313,6 @@
             }
         };
 
-        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
@@ -366,21 +322,34 @@
 
         document.querySelector('.fa-bars').parentElement.addEventListener('click', toggleMobileMenu);
 
-        // Close menu on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && !document.getElementById('mobile-menu').classList.contains('hidden')) {
                 toggleMobileMenu();
             }
         });
 
-        // Pi SDK Authentication
         const scopes = ['payments', 'username'];
 
-        function onIncompletePaymentFound(payment) { 
+        function checkAuthentication() {
             if (!isPiSDKAvailable()) {
-                alert('Pi SDK not available. Please use the Pi Network app.');
-                return { handled: false };
+                window.location.href = 'login.html';
+                return;
             }
+            Pi.authenticate(scopes)
+                .then(function(auth) {
+                    console.log('User authenticated:', auth);
+                    localStorage.setItem('pi_username', auth.user.username);
+                    localStorage.setItem('pi_accessToken', auth.accessToken);
+                })
+                .catch(function(error) {
+                    console.error('Authentication failed:', error);
+                    localStorage.removeItem('pi_username');
+                    localStorage.removeItem('pi_accessToken');
+                    window.location.href = 'login.html';
+                });
+        }
+
+        function onIncompletePaymentFound(payment) {
             console.log('Incomplete payment found:', payment);
             let paymentId = payment.identifier;
             let txid = payment.transaction.txid;
@@ -392,27 +361,8 @@
             return { handled: true };
         }
 
-        document.getElementById('pi-login').addEventListener('click', () => {
-            if (!isPiSDKAvailable()) {
-                alert('Please open this page in the Pi Network app to log in.');
-                return;
-            }
-            Pi.authenticate(scopes, onIncompletePaymentFound)
-                .then(function(auth) {
-                    console.log(`Hi there! You're ready to make payments!`);
-                    const accessToken = auth.accessToken;
-                    alert(`Welcome, ${auth.user.username}! You're ready to make payments!`);
-                    // Optionally store accessToken or redirect
-                })
-                .catch(function(error) {
-                    console.error('Authentication failed:', error);
-                    alert('Authentication failed: ' + error.message);
-                });
-        });
-
-        // Pi SDK Payment Creation
         const paymentData = {
-            amount: 10, // Example: 10 Pi
+            amount: 10,
             memo: "Subscription payment for Trend Forge",
             metadata: { subscriptionId: 1234, userId: "user123" }
         };
@@ -447,6 +397,12 @@
         document.getElementById('pi-payment').addEventListener('click', () => {
             if (!isPiSDKAvailable()) {
                 alert('Please open this page in the Pi Network app to make payments.');
+                window.location.href = 'https://minepi.com/';
+                return;
+            }
+            if (!localStorage.getItem('pi_username')) {
+                alert('Please log in to make payments.');
+                window.location.href = 'login.html';
                 return;
             }
             Pi.createPayment(paymentData, paymentCallbacks)
@@ -459,6 +415,16 @@
                     alert('Payment creation failed: ' + error.message);
                 });
         });
+
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.removeItem('pi_username');
+            localStorage.removeItem('pi_accessToken');
+            alert('You have been logged out.');
+            window.location.href = 'login.html';
+        });
+
+        // Check authentication on page load
+        checkAuthentication();
     </script>
     <script src="splash.js"></script>
 </body>
