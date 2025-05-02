@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - Trend Forge</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto Slab', serif;
+        }
+        .economist-red {
+            background-color: #e3120b;
+        }
+        .economist-red-text {
+            color: #e3120b;
+        }
+        #mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #mobile-menu .menu-item {
+            transition: background-color 0.2s, color 0.2s;
+        }
+        #mobile-menu .menu-item:hover {
+            background-color: #f5f5f5;
+            color: #e3120b;
+        }
+        .menu-item {
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-6">
+                <h1 class="text-3xl font-bold economist-red-text"><a href="index.html">Trend Forge</a></h1>
+                <div class="hidden md:flex space-x-6">
+                    <a href="world.html" class="text-gray-800 hover:economist-red-text font-medium">World</a>
+                    <a href="business.html" class="text-gray-800 hover:economist-red-text font-medium">Business</a>
+                    <a href="finance.html" class="text-gray-800 hover:economist-red-text font-medium">Finance</a>
+                    <a href="science.html" class="text-gray-800 hover:economist-red-text font-medium">Science</a>
+                    <a href="culture.html" class="text-gray-800 hover:economist-red-text font-medium">Culture</a>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">
+                    <a href="search.html"><i class="fas fa-search mr-2"></i>Search</a>
+                </button>
+                <button class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
+                    <a href="subscribe.html">Subscribe</a>
+                </button>
+                <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
+                    <i class="fas fa-bars text-gray-800 text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <section class="max-w-md mx-auto text-center">
+            <h2 class="text-3xl font-bold economist-red-text mb-6">Log In with Pi</h2>
+            <p class="text-gray-600 mb-6">Log in to Trend Forge using your Pi Network account to access your account and make payments.</p>
+            <button id="pi-login" class="economist-red text-white px-6 py-3 rounded-md hover:bg-red-700 text-lg font-medium">
+                <i class="fas fa-sign-in-alt mr-2"></i> Log In with Pi
+            </button>
+            <p class="mt-4 text-gray-600">Don't have an account? <a href="signin.html" class="economist-red-text hover:underline">Sign Up</a></p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 economist-red-text"><a href="index.html">Trend Forge</a></h3>
+                    <p class="text-gray-300 mb-4">Global insights, powered by <a href="pinetwork.html" class="economist-red-text hover:underline">Pi Network</a>.</p>
+                    <div class="flex space-x-4">
+                        <a href="subscribe.html" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 inline-flex items-center">
+                            <i class="fas fa-arrow-right mr-2"></i> Subscribe Now
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-100">Explore</h3>
+                    <ul class="space-y-2 mb-4">
+                        <li><a href="world.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-globe mr-2"></i> World</a></li>
+                        <li><a href="business.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-briefcase mr-2"></i> Business</a></li>
+                        <li><a href="finance.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-coins mr-2"></i> Finance</a></li>
+                        <li><a href="science.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-flask mr-2"></i> Science</a></li>
+                        <li><a href="culture.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-palette mr-2"></i> Culture</a></li>
+                    </ul>
+                    <div class="flex space-x-4">
+                        <a href="subscribe.html" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 inline-flex items-center">
+                            <i class="fas fa-arrow-right mr-2"></i> Subscribe
+                        </a>
+                        <a href="search.html" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 inline-flex items-center">
+                            <i class="fas fa-search mr-2"></i> Search
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-100">Support</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-400">About</h4>
+                            <ul class="space-y-2 mt-2">
+                                <li><a href="about.html" class="text-gray-300 hover:economist-red-text">Our Mission</a></li>
+                                <li><a href="contact.html" class="text-gray-300 hover:economist-red-text">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-400">Legal</h4>
+                            <ul class="space-y-2 mt-2">
+                                <li><a href="privacy.html" class="text-gray-300 hover:economist-red-text">Privacy Policy</a></li>
+                                <li><a href="terms.html" class="text-gray-300 hover:economist-red-text">Terms</a></li>
+                                <li><a href="security.html" class="text-gray-300 hover:economist-red-text">Security</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-400">Community</h4>
+                            <ul class="space-y-2 mt-2">
+                                <li><a href="faq.html" class="text-gray-300 hover:economist-red-text">FAQ</a></li>
+                                <li><a href="contribute.html" class="text-gray-300 hover:economist-red-text">Contribute</a></li>
+                                <li><a href="code_of_conduct.html" class="text-gray-300 hover:economist-red-text">Code of Conduct</a></li>
+                                <li><a href="docs.html" class="text-gray-300 hover:economist-red-text">Documentation</a></li>
+                                <li><a href="license.html" class="text-gray-300 hover:economist-red-text">License</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-100">Connect</h3>
+                    <form class="mb-6 flex space-x-2" aria-label="Newsletter Signup">
+                        <label for="email" class="sr-only">Email address</label>
+                        <input type="email" id="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none" required>
+                        <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                    </form>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="https://twitter.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://linkedin.com/company/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-300"><i class="fas fa-envelope mr-2"></i> <a href="mailto:contact@trendforge.com" class="hover:economist-red-text">contact@trendforge.com</a></p>
+                    <p class="text-gray-300 mt-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Global News Ave, World City</p>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>© 2025 Trend Forge. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden z-50" id="mobile-menu" aria-hidden="true">
+        <div class="bg-white h-full w-80 p-6 shadow-lg">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold economist-red-text">Trend Forge</h2>
+                <button class="text-gray-800 focus:outline-none" onclick="toggleMobileMenu()" aria-label="Close menu">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="space-y-2" role="navigation" aria-label="Mobile navigation">
+                <a href="index.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Home</a>
+                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">World</a>
+                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Business</a>
+                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Finance</a>
+                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Science</a>
+                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Culture</a>
+                <a href="subscribe.html" class="block economist-red-text font-medium py-2 px-4 rounded-md menu-item">Subscribe</a>
+                <a href="signin.html" class="block economist-red-text font-medium py-2 px-4 rounded-md menu-item">Sign Up</a>
+                <a href="login.html" class="block economist-red-text font-medium py-2 px-4 rounded-md menu-item">Log In</a>
+            </nav>
+            <div class="mt-6">
+                <form class="flex space-x-2" action="search.html" aria-label="Mobile search">
+                    <input type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300" aria-label="Search input">
+                    <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="mt-6 flex space-x-4">
+                <a href="https://twitter.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="https://facebook.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Facebook"><i class="fab fa-facebook text-xl"></i></a>
+                <a href="https://linkedin.com/company/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="https://instagram.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <script>
+        function isPiSDKAvailable() {
+            return typeof Pi !== 'undefined';
+        }
+
+        if (isPiSDKAvailable()) {
+            Pi.init({ version: "2.0", sandbox: true });
+        } else {
+            console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
+            alert('Please open this page in the Pi Network app to log in.');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('open');
+            menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
+        }
+
+        document.querySelector('.fa-bars').parentElement.addEventListener('click', toggleMobileMenu);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('mobile-menu').classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+        });
+
+        const scopes = ['payments', 'username'];
+
+        function authenticateWithPi(action) {
+            if (!isPiSDKAvailable()) {
+                alert('Please open this page in the Pi Network app to log in.');
+                return;
+            }
+            Pi.authenticate(scopes)
+                .then(function(auth) {
+                    console.log('Log In successful!', auth);
+                    const message = `Welcome back, ${auth.user.username}! You're ready to make payments!`;
+                    alert(message);
+                    $.post('/auth/track', { 
+                        username: auth.user.username, 
+                        action: 'login' 
+                    });
+                    window.location.href = 'index.html'; // Redirect to home after login
+                })
+                .catch(function(error) {
+                    console.error('Log In failed:', error);
+                    alert('Log In failed: ' + error.message);
+                });
+        }
+
+        document.getElementById('pi-login').addEventListener('click', () => {
+            authenticateWithPi('login');
+        });
+    </script>
+</body>
+</html>
