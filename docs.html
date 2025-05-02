@@ -62,7 +62,7 @@
                 <button class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
                     <a href="subscribe.html">Subscribe</a>
                 </button>
-                <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
+                <button class="md:hidden menu-toggle" aria-label="Open menu">
                     <i class="fas fa-bars text-gray-800 text-xl"></i>
                 </button>
             </div>
@@ -269,7 +269,7 @@ Pi.authenticate(['payments', 'username']).then(auth => {
         <div class="bg-white h-full w-80 p-6 shadow-lg">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl font-bold economist-red-text">Trend Forge</h2>
-                <button class="text-gray-800 focus:outline-none" onclick="toggleMobileMenu()" aria-label="Close menu">
+                <button class="text-gray-800 focus:outline-none menu-close" aria-label="Close menu">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
@@ -309,72 +309,89 @@ Pi.authenticate(['payments', 'username']).then(auth => {
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
-        function isPiSDKAvailable() {
-            return typeof Pi !== 'undefined';
-        }
-
-        if (isPiSDKAvailable()) {
-            Pi.init({ version: "2.0", sandbox: true });
-        } else {
-            console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
-            alert('Please open this page in the Pi Network app to access documentation.');
-            window.location.href = 'https://minepi.com/';
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('open');
-            menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
-        }
-
-        document.querySelector('.fa-bars').parentElement.addEventListener('click', toggleMobileMenu);
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !document.getElementById('mobile-menu').classList.contains('hidden')) {
-                toggleMobileMenu();
+        document.addEventListener('DOMContentLoaded', () => {
+            function isPiSDKAvailable() {
+                return typeof Pi !== 'undefined';
             }
-        });
 
-        const scopes = ['payments', 'username'];
-
-        function checkAuthentication() {
-            if (!isPiSDKAvailable()) {
-                window.location.href = 'login.html';
-                return;
+            if (isPiSDKAvailable()) {
+                Pi.init({ version: "2.0", sandbox: true });
+            } else {
+                console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
+                alert('Please open this page in the Pi Network app to access documentation.');
+                window.location.href = 'https://minepi.com/';
             }
-            Pi.authenticate(scopes)
-                .then(function(auth) {
-                    console.log('User authenticated:', auth);
-                    localStorage.setItem('pi_username', auth.user.username);
-                    localStorage.setItem('pi_accessToken', auth.accessToken);
-                    $.post('/auth/track', { 
-                        username: auth.user.username, 
-                        action: 'view_docs' 
-                    });
-                })
-                .catch(function(error) {
-                    console.error('Authentication failed:', error);
-                    localStorage.removeItem('pi_username');
-                    localStorage.removeItem('pi_accessToken');
+
+            function toggleMobileMenu() {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('open');
+                menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
+            }
+
+            // Attach event listener to burger button
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', toggleMobileMenu);
+            } else {
+                console.error('Menu toggle button not found.');
+            }
+
+            // Attach event listener to close button
+            const menuClose = document.querySelector('.menu-close');
+            if (menuClose) {
+                menuClose.addEventListener('click', toggleMobileMenu);
+            } else {
+                console.error('Menu close button not found.');
+            }
+
+            // Escape key support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !document.getElementById('mobile-menu').classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
+            });
+
+            const scopes = ['payments', 'username'];
+
+            function checkAuthentication() {
+                if (!isPiSDKAvailable()) {
                     window.location.href = 'login.html';
-                });
-        }
+                    return;
+                }
+                Pi.authenticate(scopes)
+                    .then(function(auth) {
+                        console.log('User authenticated:', auth);
+                        localStorage.setItem('pi_username', auth.user.username);
+                        localStorage.setItem('pi_accessToken', auth.accessToken);
+                        $.post('/auth/track', { 
+                            username: auth.user.username, 
+                            action: 'view_docs' 
+                        });
+                    })
+                    .catch(function(error) {
+                        console.error('Authentication failed:', error);
+                        localStorage.removeItem('pi_username');
+                        localStorage.removeItem('pi_accessToken');
+                        window.location.href = 'login.html';
+                    });
+            }
 
-        document.getElementById('pi-payment').addEventListener('click', () => {
-            alert('Please visit the subscription page to make a payment.');
-            window.location.href = 'subscribe.html';
+            document.getElementById('pi-payment').addEventListener('click', () => {
+                alert('Please visit the subscription page to make a payment.');
+                window.location.href = 'subscribe.html';
+            });
+
+            document.getElementById('logout').addEventListener('click', () => {
+                localStorage.removeItem('pi_username');
+                localStorage.removeItem('pi_accessToken');
+                alert('You have been logged out.');
+                window.location.href = 'login.html';
+            });
+
+            // Check authentication on page load
+            checkAuthentication();
         });
-
-        document.getElementById('logout').addEventListener('click', () => {
-            localStorage.removeItem('pi_username');
-            localStorage.removeItem('pi_accessToken');
-            alert('You have been logged out.');
-            window.location.href = 'login.html';
-        });
-
-        // Check authentication on page load
-        checkAuthentication();
     </script>
 </body>
 </html>
