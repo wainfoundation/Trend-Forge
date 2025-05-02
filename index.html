@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts to mimic Economist's typography -->
+    <!-- Google Fonts -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
         body {
@@ -27,6 +27,27 @@
         .premium-icon::before {
             content: '🔒 ';
             color: #e3120b;
+        }
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #mobile-menu .menu-item {
+            transition: background-color 0.2s, color 0.2s;
+        }
+        #mobile-menu .menu-item:hover {
+            background-color: #f5f5f5;
+            color: #e3120b;
+        }
+        /* Ensure touch-friendly buttons */
+        .menu-item {
+            min-height: 44px; /* Minimum touch target size */
+            display: flex;
+            align-items: center;
         }
     </style>
 </head>
@@ -51,7 +72,7 @@
                 <button class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
                     <a href="subscribe.html">Subscribe</a>
                 </button>
-                <button class="md:hidden">
+                <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
                     <i class="fas fa-bars text-gray-800 text-xl"></i>
                 </button>
             </div>
@@ -157,7 +178,7 @@
         </section>
     </main>
 
-   <!-- Enhanced Footer -->
+    <!-- Enhanced Footer -->
     <footer class="bg-black text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -259,60 +280,186 @@
         </div>
     </footer>
 
-    <!-- Mobile Menu -->
-    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden" id="mobile-menu">
-        <div class="bg-white h-full w-64 p-6">
+    <!-- Enhanced Mobile Menu -->
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden z-50" id="mobile-menu" aria-hidden="true">
+        <div class="bg-white h-full w-80 p-6 shadow-lg">
             <div class="flex justify-between items-center mb-8">
-                <h2 class="text-xl font-bold economist-red-text">Menu</h2>
-                <button class="text-gray-800" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
-                    <i class="fas fa-times text-xl"></i>
+                <h2 class="text-2xl font-bold economist-red-text">Trend Forge</h2>
+                <button class="text-gray-800 focus:outline-none" onclick="toggleMobileMenu()" aria-label="Close menu">
+                    <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
-            <nav class="space-y-4">
-                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium">World</a>
-                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium">Business</a>
-                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium">Finance</a>
-                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium">Science</a>
-                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium">Culture</a>
-                <a href="subscribe.html" class="block economist-red-text font-medium">Subscribe</a>
+            <nav class="space-y-2" role="navigation" aria-label="Mobile navigation">
+                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">World</a>
+                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Business</a>
+                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Finance</a>
+                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Science</a>
+                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Culture</a>
+                <a href="subscribe.html" class="block economist-red-text font-medium py-2 px-4 rounded-md menu-item">Subscribe</a>
+                <!-- Pi SDK Login Button -->
+                <button id="pi-login" class="w-full text-left economist-red-text font-medium py-2 px-4 rounded-md menu-item">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Login with Pi
+                </button>
+                <!-- Pi SDK Payment Button -->
+                <button id="pi-payment" class="w-full text-left economist-red-text font-medium py-2 px-4 rounded-md menu-item">
+                    <i class="fas fa-money-bill-wave mr-2"></i> Make Payment
+                </button>
             </nav>
+            <!-- Search Bar -->
+            <div class="mt-6">
+                <form class="flex space-x-2" action="search.html" aria-label="Mobile search">
+                    <input type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300" aria-label="Search input">
+                    <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+            <!-- Social Media Links -->
+            <div class="mt-6 flex space-x-4">
+                <a href="https://twitter.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="https://facebook.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Facebook"><i class="fab fa-facebook text-xl"></i></a>
+                <a href="https://linkedin.com/company/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="https://instagram.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+            </div>
         </div>
     </div>
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
-        // Mobile menu toggle
-        document.querySelector('.fa-bars').parentElement.addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.remove('hidden');
+        // Check if Pi SDK is available
+        function isPiSDKAvailable() {
+            return typeof Pi !== 'undefined';
+        }
+
+        // Initialize Pi SDK
+        if (isPiSDKAvailable()) {
+            Pi.init({ version: "2.0", sandbox: true });
+        } else {
+            console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
+            alert('Please open this page in the Pi Network app to use Pi features.');
+        }
+
+        // Configure Axios client
+        const axiosClient = axios.create({
+            baseURL: '/', // Adjust base URL as needed
+            headers: {
+                'Content-Type': 'application/json'
+                // Add authentication headers if needed
+            }
+        });
+        const config = {
+            headers: {
+                'X-Custom-Header': 'TrendForge'
+            }
+        };
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('open');
+            menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
+        }
+
+        document.querySelector('.fa-bars').parentElement.addEventListener('click', toggleMobileMenu);
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !document.getElementById('mobile-menu').classList.contains('hidden')) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Pi SDK Authentication
+        const scopes = ['payments', 'username'];
+
+        function onIncompletePaymentFound(payment) { 
+            if (!isPiSDKAvailable()) {
+                alert('Pi SDK not available. Please use the Pi Network app.');
+                return { handled: false };
+            }
+            console.log('Incomplete payment found:', payment);
+            let paymentId = payment.identifier;
+            let txid = payment.transaction.txid;
+            $.post('/payment/complete', {
+                paymentId: paymentId,
+                txid: txid,
+                debug: 'cancel'
+            });
+            return { handled: true };
+        }
+
+        document.getElementById('pi-login').addEventListener('click', () => {
+            if (!isPiSDKAvailable()) {
+                alert('Please open this page in the Pi Network app to log in.');
+                return;
+            }
+            Pi.authenticate(scopes, onIncompletePaymentFound)
+                .then(function(auth) {
+                    console.log(`Hi there! You're ready to make payments!`);
+                    const accessToken = auth.accessToken;
+                    alert(`Welcome, ${auth.user.username}! You're ready to make payments!`);
+                    // Optionally store accessToken or redirect
+                })
+                .catch(function(error) {
+                    console.error('Authentication failed:', error);
+                    alert('Authentication failed: ' + error.message);
+                });
+        });
+
+        // Pi SDK Payment Creation
+        const paymentData = {
+            amount: 10, // Example: 10 Pi
+            memo: "Subscription payment for Trend Forge",
+            metadata: { subscriptionId: 1234, userId: "user123" }
+        };
+
+        const onReadyForServerApproval = (paymentId) => {
+            console.log("onReadyForServerApproval", paymentId);
+            axiosClient.post('/payments/approve', { paymentId }, config)
+                .then(() => console.log('Approval sent to server'))
+                .catch((error) => console.error('Approval failed:', error));
+        };
+
+        const onReadyForServerCompletion = (paymentId, txid) => {
+            console.log("onReadyForServerCompletion", paymentId, txid);
+            axiosClient.post('/payments/complete', { paymentId, txid }, config)
+                .then(() => console.log('Completion sent to server'))
+                .catch((error) => console.error('Completion failed:', error));
+        };
+
+        const paymentCallbacks = {
+            onReadyForServerApproval,
+            onReadyForServerCompletion,
+            onCancel: function(paymentId) {
+                console.log('Payment cancelled:', paymentId);
+                alert('Payment was cancelled.');
+            },
+            onError: function(error, payment) {
+                console.error('Payment error:', error, payment);
+                alert('Payment failed: ' + error.message);
+            }
+        };
+
+        document.getElementById('pi-payment').addEventListener('click', () => {
+            if (!isPiSDKAvailable()) {
+                alert('Please open this page in the Pi Network app to make payments.');
+                return;
+            }
+            Pi.createPayment(paymentData, paymentCallbacks)
+                .then(function(payment) {
+                    console.log('Payment created:', payment);
+                    alert('Payment created successfully!');
+                })
+                .catch(function(error) {
+                    console.error('Payment creation failed:', error);
+                    alert('Payment creation failed: ' + error.message);
+                });
         });
     </script>
     <script src="splash.js"></script>
-</body>
-    <!-- Mobile Menu -->
-    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden" id="mobile-menu">
-        <div class="bg-white h-full w-64 p-6">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-xl font-bold economist-red-text">Menu</h2>
-                <button class="text-gray-800" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <nav class="space-y-4">
-                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium">World</a>
-                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium">Business</a>
-                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium">Finance</a>
-                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium">Science</a>
-                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium">Culture</a>
-                <a href="subscribe.html" class="block economist-red-text font-medium">Subscribe</a>
-            </nav>
-        </div>
-    </div>
-
-    <!-- JavaScript for Mobile Menu -->
-    <script>
-        document.querySelector('.fa-bars').parentElement.addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.remove('hidden');
-        });
-    </script>
 </body>
 </html>
