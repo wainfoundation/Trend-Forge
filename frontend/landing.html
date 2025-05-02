@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trend Forge - Global News, Pi-Powered</title>
+    <meta name="description" content="Trend Forge: A modern, Pi-powered news platform offering global insights across world, business, science, and culture with premium content and Pi subscriptions.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        body { font-family: 'Roboto', sans-serif; line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Roboto Slab', serif; }
+        .economist-red { background-color: #e3120b; }
+        .economist-red-text { color: #e3120b; }
+        .premium-icon::before { content: '🔒 '; color: #e3120b; }
+        .hover-scale { transition: transform 0.3s ease; }
+        .hover-scale:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-6">
+                <h1 class="text-3xl font-bold economist-red-text"><a href="index.html">Trend Forge</a></h1>
+                <div class="hidden md:flex space-x-6">
+                    <a href="world.html" class="text-gray-800 hover:economist-red-text font-medium">World</a>
+                    <a href="business.html" class="text-gray-800 hover:economist-red-text font-medium">Business</a>
+                    <a href="finance.html" class="text-gray-800 hover:economist-red-text font-medium">Finance</a>
+                    <a href="science.html" class="text-gray-800 hover:economist-red-text font-medium">Science</a>
+                    <a href="culture.html" class="text-gray-800 hover:economist-red-text font-medium">Culture</a>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">
+                    <a href="search.html"><i class="fas fa-search mr-2"></i>Search</a>
+                </button>
+                <button class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
+                    <a href="subscribe.html">Subscribe</a>
+                </button>
+                <button class="md:hidden">
+                    <i class="fas fa-bars text-gray-800 text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gray-900 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Discover Trend Forge</h1>
+            <p class="text-xl md:text-2xl mb-6 max-w-3xl mx-auto">
+                A modern, Pi-powered news platform offering global insights across world, business, science, and culture—with premium content and Pi subscriptions.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="subscribe.html" class="economist-red text-white px-6 py-3 rounded-md hover:bg-red-700 font-medium hover-scale">
+                    Start Your Subscription
+                </a>
+                <a href="index.html" class="bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-100 font-medium hover-scale">
+                    Explore News
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Trend Forge Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold economist-red-text mb-10 text-center">Why Choose Trend Forge?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-gray-50 rounded-lg hover-scale">
+                    <i class="fas fa-coins text-4xl economist-red-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Seamless Pi Subscriptions</h3>
+                    <p class="text-gray-600">
+                        Unlock premium content with Pi Network payments, starting at just 6 PI/month—fast, secure, and innovative.
+                    </p>
+                </div>
+                <div class="text-center p-6 bg-gray-50 rounded-lg hover-scale">
+                    <i class="fas fa-globe text-4xl economist-red-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Authoritative Global Insights</h3>
+                    <p class="text-gray-600">
+                        Dive into expertly crafted analysis across World, Business, Finance, Science, and Culture, inspired by <em>The Economist</em>.
+                    </p>
+                </div>
+                <div class="text-center p-6 bg-gray-50 rounded-lg hover-scale">
+                    <i class="fas fa-lock text-4xl economist-red-text mb-4"></i>
+                    <h3 class="text-xl font-bold mb-3">Exclusive Premium Content</h3>
+                    <p class="text-gray-600">
+                        Access in-depth reports and exclusive articles available only to subscribers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Coverage Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold economist-red-text mb-10 text-center">Our Coverage</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white border border-gray-200 p-6 rounded-lg hover-scale">
+                    <img src="https://picsum.photos/400/200?random=71" alt="World News" class="w-full h-40 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-bold mb-2"><a href="world.html" class="hover:economist-red-text">World</a></h3>
+                    <p class="text-gray-600 mb-4">
+                        From geopolitics to trade, uncover the forces shaping our world with articles like “Tensions Rise in Asia-Pacific Trade Talks.”
+                    </p>
+                    <a href="world/article1.html" class="economist-red-text hover:underline premium-icon">Read Premium Article</a>
+                </div>
+                <div class="bg-white border border-gray-200 p-6 rounded-lg hover-scale">
+                    <img src="https://picsum.photos/400/200?random=72" alt="Finance News" class="w-full h-40 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-bold mb-2"><a href="finance.html" class="hover:economist-red-text">Finance</a></h3>
+                    <p class="text-gray-600 mb-4">
+                        Stay ahead with market trends and cryptocurrency updates, including Pi Network’s latest developments.
+                    </p>
+                    <a href="pinetwork.html" class="economist-red-text hover:underline">Explore Pi Network News</a>
+                </div>
+                <div class="bg-white border border-gray-200 p-6 rounded-lg hover-scale">
+                    <img src="https://picsum.photos/400/200?random=73" alt="Science News" class="w-full h-40 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-bold mb-2"><a href="science.html" class="hover:economist-red-text">Science</a></h3>
+                    <p class="text-gray-600 mb-4">
+                        Discover breakthroughs and innovations driving the future of technology and humanity.
+                    </p>
+                    <a href="science.html" class="economist-red-text hover:underline">Explore Science</a>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="index.html" class="text-gray-800 hover:economist-red-text font-medium">View All Categories <i class="fas fa-arrow-right ml-2"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Plans Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold economist-red-text mb-10 text-center">Subscribe with Pi Network</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 border border-gray-200 p-8 rounded-lg text-center hover-scale">
+                    <h3 class="text-2xl font-bold mb-3">Digital</h3>
+                    <p class="text-3xl economist-red-text mb-4">6 PI/month</p>
+                    <p class="text-gray-600 mb-6">Full access to all premium articles and online content.</p>
+                    <a href="subscribe.html" class="economist-red text-white px-6 py-3 rounded-md hover:bg-red-700 font-medium">Subscribe Now</a>
+                </div>
+                <div class="bg-gray-50 border border-gray-200 p-8 rounded-lg text-center hover-scale">
+                    <h3 class="text-2xl font-bold mb-3">Premium</h3>
+                    <p class="text-3xl economist-red-text mb-4">9 PI/month</p>
+                    <p class="text-gray-600 mb-6">Digital access plus exclusive reports and insights.</p>
+                    <a href="subscribe.html" class="economist-red text-white px-6 py-3 rounded-md hover:bg-red-700 font-medium">Subscribe Now</a>
+                </div>
+                <div class="bg-gray-50 border border-gray-200 p-8 rounded-lg text-center hover-scale">
+                    <h3 class="text-2xl font-bold mb-3">Lifetime</h3>
+                    <p class="text-3xl economist-red-text mb-4">99 PI</p>
+                    <p class="text-gray-600 mb-6">One-time payment for unlimited access forever.</p>
+                    <a href="subscribe.html" class="economist-red text-white px-6 py-3 rounded-md hover:bg-red-700 font-medium">Subscribe Now</a>
+                </div>
+            </div>
+            <p class="text-center text-gray-600 mt-8">
+                Powered by <a href="pinetwork.html" class="economist-red-text hover:underline">Pi Network</a>. Questions? Visit our <a href="faq.html" class="economist-red-text hover:underline">FAQ</a>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Community Engagement Section -->
+    <section class="py-16 bg-gray-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Shape the Future of News</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Join our community of contributors to enhance Trend Forge’s platform, from code to content, and make a global impact.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="contribute.html" class="bg-white text-gray-800 px-6 py-3 rounded-md hover:bg-gray-100 font-medium hover-scale">
+                    Get Involved
+                </a>
+                <a href="code_of_conduct.html" class="economist-red text-white px-6 py-3 rounded-md hover:bg-red-700 font-medium hover-scale">
+                    Our Code of Conduct
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white mt-12">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Trend Forge</h3>
+                    <p class="text-gray-400">Global insights, powered by Pi Network, delivered with clarity and depth.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Sections</h3>
+                    <ul class="space-y-2">
+                        <li><a href="world.html" class="text-gray-400 hover:economist-red-text">World</a></li>
+                        <li><a href="business.html" class="text-gray-400 hover:economist-red-text">Business</a></li>
+                        <li><a href="finance.html" class="text-gray-400 hover:economist-red-text">Finance</a></li>
+                        <li><a href="science.html" class="text-gray-400 hover:economist-red-text">Science</a></li>
+                        <li><a href="culture.html" class="text-gray-400 hover:economist-red-text">Culture</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="about.html" class="text-gray-400 hover:economist-red-text">Our Mission</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:economist-red-text">Contact Us</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:economist-red-text">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:economist-red-text">Terms</a></li>
+                        <li><a href="security.html" class="text-gray-400 hover:economist-red-text">Security</a></li>
+                        <li><a href="faq.html" class="text-gray-400 hover:economist-red-text">FAQ</a></li>
+                        <li><a href="contribute.html" class="text-gray-400 hover:economist-red-text">Contribute</a></li>
+                        <li><a href="code_of_conduct.html" class="text-gray-400 hover:economist-red-text">Code of Conduct</a></li>
+                        <li><a href="docs.html" class="text-gray-400 hover:economist-red-text">Documentation</a></li>
+                        <li><a href="license.html" class="text-gray-400 hover:economist-red-text">License</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://twitter.com/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="https://linkedin.com/company/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>© 2025 Trend Forge. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu -->
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden" id="mobile-menu">
+        <div class="bg-white h-full w-64 p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-xl font-bold economist-red-text">Menu</h2>
+                <button class="text-gray-800" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <nav class="space-y-4">
+                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium">World</a>
+                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium">Business</a>
+                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium">Finance</a>
+                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium">Science</a>
+                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium">Culture</a>
+                <a href="subscribe.html" class="block economist-red-text font-medium">Subscribe</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.fa-bars').parentElement.addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.remove('hidden');
+        });
+    </script>
+    <script src="splash.js"></script>
+</body>
+</html>
