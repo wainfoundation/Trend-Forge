@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Trend Forge Update - Global Insights</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -12,6 +12,7 @@
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+            margin: 0;
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Roboto Slab', serif;
@@ -26,19 +27,18 @@
             content: '🔒 ';
             color: #e3120b;
         }
-        /* Custom properties for theming */
+        /* Custom properties */
         :root {
             --economist-red: #e3120b;
             --menu-transition: all 0.3s ease-in-out;
             --animation-delay: 0.1s;
         }
-        /* Header animations */
+        /* Header */
         header {
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            transition: box-shadow 0.3s ease;
         }
         header.scrolled {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transform: translateY(0);
         }
         .logo {
             animation: logoFadeIn 1s ease-out;
@@ -47,15 +47,15 @@
             from { opacity: 0; transform: scale(0.8); }
             to { opacity: 1; transform: scale(1); }
         }
-        /* Hamburger menu animation */
+        /* Hamburger menu */
         .hamburger {
-            position: relative;
-            width: 24px;
+            width: 28px;
             height: 24px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
+            touch-action: manipulation;
         }
         .hamburger span {
             width: 100%;
@@ -75,7 +75,7 @@
         }
         /* Mobile search bar */
         #mobile-search-bar {
-            transition: var(--menu-transition);
+            transition: max-height 0.3s ease, padding 0.3s ease;
             max-height: 0;
             overflow: hidden;
         }
@@ -83,11 +83,12 @@
             max-height: 60px;
             padding: 0.5rem 0;
         }
-        /* Mobile menu container */
+        /* Mobile menu */
         #mobile-menu {
-            transition: var(--menu-transition);
+            transition: transform 0.4s ease-in-out;
             transform: translateX(-100%);
             backdrop-filter: blur(5px);
+            -webkit-overflow-scrolling: touch;
         }
         #mobile-menu.open {
             transform: translateX(0);
@@ -95,9 +96,10 @@
         #mobile-menu .bg-white {
             background: linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
             box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+            overscroll-behavior: contain;
         }
         #mobile-menu .menu-item {
-            min-height: 44px;
+            min-height: 48px;
             display: flex;
             align-items: center;
             transition: var(--menu-transition);
@@ -105,6 +107,7 @@
             opacity: 0;
             transform: translateX(-20px);
             animation: slideIn 0.3s ease forwards;
+            touch-action: manipulation;
         }
         #mobile-menu.open .menu-item {
             animation-delay: calc(var(--animation-delay) * var(--order));
@@ -123,7 +126,7 @@
         }
         /* Submenu */
         #support-submenu {
-            transition: var(--menu-transition);
+            transition: max-height 0.3s ease;
             max-height: 0;
             overflow: hidden;
         }
@@ -137,15 +140,18 @@
         }
         /* Focus states */
         #mobile-menu a:focus,
-        #mobile-menu button:focus {
+        #mobile-menu button:focus,
+        .btn-animated:focus {
             outline: none;
             box-shadow: 0 0 0 2px var(--economist-red);
         }
         /* Social icons */
-        #mobile-menu .fa-brands {
+        #mobile-menu .fa-brands,
+        footer .fa-brands {
             transition: var(--menu-transition);
         }
-        #mobile-menu .fa-brands:hover {
+        #mobile-menu .fa-brands:hover,
+        footer .fa-brands:hover {
             transform: scale(1.2);
             color: var(--economist-red);
         }
@@ -162,27 +168,63 @@
         /* Button animations */
         .btn-animated {
             transition: var(--menu-transition);
+            touch-action: manipulation;
         }
         .btn-animated:hover {
             transform: scale(1.05);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
+        .btn-animated:active {
+            transform: scale(0.95);
+        }
         /* Page load animation */
-        body {
-            animation: pageLoad 0.5s ease;
+        @media (prefers-reduced-motion: no-preference) {
+            body {
+                animation: pageLoad 0.5s ease;
+            }
         }
         @keyframes pageLoad {
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        /* Lazy-loaded images */
+        img {
+            loading: lazy;
+        }
+        /* Touch-friendly footer links */
+        footer a {
+            display: inline-block;
+            padding: 0.5rem;
+        }
+        /* Clear button for search */
+        .search-clear {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #e5e7eb;
+            border-radius: 50%;
+            padding: 4px;
+        }
+        .search-wrapper:focus-within .search-clear {
+            display: block;
+        }
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *:before, *:after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-white">
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-4 md:space-x-6">
-                <h1 class="text-2xl md:text-3xl font-bold economist-red-text logo"><a href="index.html">Trend Forge</a></h1>
-                <div class="hidden md:flex space-x-6">
+        <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <h1 class="text-2xl font-bold economist-red-text logo"><a href="index.html">Trend Forge</a></h1>
+                <div class="hidden md:flex space-x-4">
                     <a href="world.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">World</a>
                     <a href="business.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">Business</a>
                     <a href="finance.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">Finance</a>
@@ -190,24 +232,29 @@
                     <a href="culture.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">Culture</a>
                 </div>
             </div>
-            <div class="flex items-center space-x-2 md:space-x-4">
-                <button id="mobile-search-toggle" class="bg-gray-100 text-gray-800 px-3 py-2 rounded-md hover:bg-gray-200 btn-animated md:block" aria-label="Toggle search">
+            <div class="flex items-center space-x-2">
+                <button id="mobile-search-toggle" class="bg-gray-100 text-gray-800 p-2 rounded-md hover:bg-gray-200 btn-animated" aria-label="Toggle search">
                     <i class="fas fa-search"></i>
                 </button>
                 <button class="economist-red text-white px-3 py-2 rounded-md hover:bg-red-700 btn-animated hidden md:block">
                     <a href="subscribe.html">Subscribe</a>
                 </button>
-                <button class="md:hidden hamburger" aria-label="Open menu">
+                <button class="hamburger md:hidden" aria-label="Toggle menu">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
             </div>
         </nav>
-        <div id="mobile-search-bar" class="container mx-auto px-4 hidden md:hidden">
-            <form class="flex space-x-2" action="search.html" aria-label="Mobile header search">
-                <label for="header-search" class="sr-only">Search</label>
-                <input id="header-search" type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
+        <div id="mobile-search-bar" class="container mx-auto px-4">
+            <form class="flex space-x-2 relative" action="search.html" aria-label="Mobile header search">
+                <div class="search-wrapper flex-1 relative">
+                    <label for="header-search" class="sr-only">Search</label>
+                    <input id="header-search" type="text" placeholder="Search..." class="w-full px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
+                    <button type="button" class="search-clear" aria-label="Clear search">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
                 <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 btn-animated" aria-label="Search">
                     <i class="fas fa-search"></i>
                 </button>
@@ -220,7 +267,7 @@
             <h2 class="text-2xl font-bold economist-red-text mb-6">The Big Story</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="md:col-span-2 bg-white border border-gray-200">
-                    <img src="https://picsum.photos/800/400" alt="Main Feature" class="w-full h-64 object-cover">
+                    <img src="https://picsum.photos/800/400" alt="Main Feature" class="w-full h-64 object-cover cursor-zoom-in">
                     <div class="p-6">
                         <span class="economist-red-text text-sm font-semibold uppercase">Business</span>
                         <h3 class="text-2xl font-bold mt-2 hover:economist-red-text cursor-pointer"><a href="business.html">Tech Titans Merge in Historic Deal</a></h3>
@@ -388,12 +435,15 @@
     </footer>
 
     <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden z-50" id="mobile-menu" aria-hidden="true">
-        <div class="bg-white h-full w-80 max-w-[80%] p-6 shadow-xl transform transition-transform duration-300 ease-in-out">
-            <div class="flex justify-between items-center mb-8">
+        <div class="bg-white h-full w-80 max-w-[80%] p-6 shadow-xl transform transition-transform duration-400 ease-in-out">
+            <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold economist-red-text">Trend Forge</h2>
-                <button class="text-gray-800 focus:outline-none menu-close focus:ring-2 focus:ring-red-500 rounded" aria-label="Close menu">
+                <button class="text-gray-800 focus:outline-none menu-close focus:ring-2 focus:ring-red-500 rounded p-2" aria-label="Close menu">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
+            </div>
+            <div id="user-profile" class="mb-6 hidden">
+                <p class="text-gray-800 font-medium">Welcome, <span id="username"></span></p>
             </div>
             <nav class="space-y-2" role="navigation" aria-label="Mobile navigation">
                 <a href="index.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 1">
@@ -434,9 +484,14 @@
                 </button>
             </nav>
             <div class="mt-8">
-                <form class="flex space-x-2" action="search.html" aria-label="Mobile search">
-                    <label for="mobile-search" class="sr-only">Search</label>
-                    <input id="mobile-search" type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
+                <form class="flex space-x-2 relative" action="search.html" aria-label="Mobile search">
+                    <div class="search-wrapper flex-1 relative">
+                        <label for="mobile-search" class="sr-only">Search</label>
+                        <input id="mobile-search" type="text" placeholder="Search..." class="w-full px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
+                        <button type="button" class="search-clear" aria-label="Clear search">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                     <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 btn-animated" aria-label="Search">
                         <i class="fas fa-search"></i>
                     </button>
@@ -461,16 +516,36 @@
                 return typeof Pi !== 'undefined';
             }
 
+            // Initialize Pi SDK with error handling
             if (isPiSDKAvailable()) {
-                Pi.init({ version: "2.0",检察沙箱: true });
+                try {
+                    Pi.init({ version: "2.0", sandbox: true });
+                } catch (error) {
+                    console.error('Pi SDK initialization failed:', error);
+                    showError('Failed to initialize Pi SDK. Please try again later.');
+                }
             } else {
-                console.warn('Pi SDK不可用。请在Pi网络应用中打开此页面。');
-                alert('请在Pi网络应用中打开此页面以访问文档。');
-                window.location.href = 'https://minepi.com/';
+                console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
+                showError('Please open this page in the Pi Network app to access documentation.');
+                setTimeout(() => {
+                    window.location.href = 'https://minepi.com/';
+                }, 3000);
+            }
+
+            // Show error message
+            function showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-md shadow-lg z-50';
+                errorDiv.textContent = message;
+                document.body.appendChild(errorDiv);
+                setTimeout(() => errorDiv.remove(), 5000);
             }
 
             // Toggle mobile menu
+            let isMenuToggling = false;
             function toggleMobileMenu() {
+                if (isMenuToggling) return;
+                isMenuToggling = true;
                 const menu = document.getElementById('mobile-menu');
                 const hamburger = document.querySelector('.hamburger');
                 menu.classList.toggle('hidden');
@@ -478,7 +553,6 @@
                 hamburger.classList.toggle('open');
                 menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
 
-                // Trap focus within menu when open
                 if (!menu.classList.contains('hidden')) {
                     const focusableElements = menu.querySelectorAll('a, button, input');
                     const firstElement = focusableElements[0];
@@ -487,15 +561,27 @@
                 } else {
                     document.body.style.overflow = '';
                 }
+                setTimeout(() => isMenuToggling = false, 400);
             }
 
             // Toggle mobile search bar
+            let isSearchToggling = false;
             function toggleMobileSearch() {
+                if (isSearchToggling) return;
+                isSearchToggling = true;
                 const searchBar = document.getElementById('mobile-search-bar');
                 searchBar.classList.toggle('open');
                 if (searchBar.classList.contains('open')) {
                     document.getElementById('header-search').focus();
                 }
+                setTimeout(() => isSearchToggling = false, 300);
+            }
+
+            // Clear search input
+            function clearSearch(inputId) {
+                const input = document.getElementById(inputId);
+                input.value = '';
+                input.focus();
             }
 
             // Debounce function
@@ -507,15 +593,35 @@
                 };
             }
 
+            // Throttle function for scroll events
+            function throttle(fn, wait) {
+                let lastTime = 0;
+                return (...args) => {
+                    const now = Date.now();
+                    if (now - lastTime >= wait) {
+                        fn.apply(this, args);
+                        lastTime = now;
+                    }
+                };
+            }
+
             // Toggle submenu
             function toggleSubmenu(e) {
                 const button = e.currentTarget;
                 const submenu = document.getElementById('support-submenu');
                 const isExpanded = button.getAttribute('aria-expanded') === 'true';
-
                 button.setAttribute('aria-expanded', !isExpanded);
                 submenu.classList.toggle('open');
                 submenu.setAttribute('aria-hidden', isExpanded);
+            }
+
+            // Swipe to close menu
+            let touchStartX = 0;
+            let touchEndX = 0;
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 100 && !document.getElementById('mobile-menu').classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
             }
 
             // Event listeners
@@ -524,15 +630,23 @@
             const backdrop = document.getElementById('mobile-menu');
             const submenuToggle = document.querySelector('.toggle-submenu');
             const searchToggle = document.getElementById('mobile-search-toggle');
+            const searchClears = document.querySelectorAll('.search-clear');
 
             if (menuToggle) {
-                menuToggle.addEventListener('click', debounce(toggleMobileMenu, 200));
+                menuToggle.addEventListener('click', toggleMobileMenu);
+                menuToggle.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+                menuToggle.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                });
             } else {
                 console.error('Menu toggle button not found.');
             }
 
             if (menuClose) {
-                menuClose.addEventListener('click', debounce(toggleMobileMenu, 200));
+                menuClose.addEventListener('click', toggleMobileMenu);
             } else {
                 console.error('Menu close button not found.');
             }
@@ -543,6 +657,13 @@
                         toggleMobileMenu();
                     }
                 });
+                backdrop.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+                backdrop.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                });
             }
 
             if (submenuToggle) {
@@ -552,6 +673,23 @@
             if (searchToggle) {
                 searchToggle.addEventListener('click', toggleMobileSearch);
             }
+
+            searchClears.forEach(button => {
+                button.addEventListener('click', () => {
+                    const inputId = button.closest('.search-wrapper').querySelector('input').id;
+                    clearSearch(inputId);
+                });
+            });
+
+            // Close search bar on form submit
+            document.querySelectorAll('form[action="search.html"]').forEach(form => {
+                form.addEventListener('submit', () => {
+                    const searchBar = document.getElementById('mobile-search-bar');
+                    if (searchBar.classList.contains('open')) {
+                        toggleMobileSearch();
+                    }
+                });
+            });
 
             // Escape key support
             document.addEventListener('keydown', (e) => {
@@ -567,13 +705,13 @@
                 }
             });
 
-            // Focus trapping for menu
-            document.getElementById('mobile-menu').addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    const focusableElements = document.querySelectorAll('#mobile-menu a, #mobile-menu button, #mobile-menu input');
-                    const firstElement = focusableElements[0];
-                    const lastElement = focusableElements[focusableElements.length - 1];
+            // Focus trapping
+            function trapFocus(container, e) {
+                const focusableElements = container.querySelectorAll('a, button, input');
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
 
+                if (e.key === 'Tab') {
                     if (e.shiftKey && document.activeElement === firstElement) {
                         e.preventDefault();
                         lastElement.focus();
@@ -582,17 +720,20 @@
                         firstElement.focus();
                     }
                 }
-            });
+            }
+
+            document.getElementById('mobile-menu').addEventListener('keydown', (e) => trapFocus(document.getElementById('mobile-menu'), e));
+            document.getElementById('mobile-search-bar').addEventListener('keydown', (e) => trapFocus(document.getElementById('mobile-search-bar'), e));
 
             // Header scroll effect
-            window.addEventListener('scroll', () => {
+            window.addEventListener('scroll', throttle(() => {
                 const header = document.querySelector('header');
                 if (window.scrollY > 50) {
                     header.classList.add('scrolled');
                 } else {
                     header.classList.remove('scrolled');
                 }
-            });
+            }, 100));
 
             // Section animations
             const sections = document.querySelectorAll('.animate-section');
@@ -600,53 +741,99 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.2 });
 
             sections.forEach(section => observer.observe(section));
 
+            // Image zoom on tap
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('click', () => {
+                    img.classList.toggle('zoomed');
+                    if (img.classList.contains('zoomed')) {
+                        img.style.transform = 'scale(1.5)';
+                        img.style.zIndex = '1000';
+                    } else {
+                        img.style.transform = 'scale(1)';
+                        img.style.zIndex = 'auto';
+                    }
+                });
+            });
+
             // Authentication logic
             const scopes = ['payments', 'username'];
+            let isAuthenticating = false;
 
             function checkAuthentication() {
-                if (!isPiSDKAvailable()) {
-                    window.location.href = 'login.html';
+                if (isAuthenticating || !isPiSDKAvailable()) {
                     return;
                 }
+                isAuthenticating = true;
                 Pi.authenticate(scopes)
                     .then((auth) => {
                         console.log('User authenticated:', auth);
                         localStorage.setItem('pi_username', auth.user.username);
                         localStorage.setItem('pi_accessToken', auth.accessToken);
+                        updateUserProfile(auth.user.username);
                         $.post('/auth/track', {
                             username: auth.user.username,
                             action: 'view_docs',
+                        }).fail(() => {
+                            console.error('Failed to track authentication.');
                         });
                     })
                     .catch((error) => {
                         console.error('Authentication failed:', error);
                         localStorage.removeItem('pi_username');
                         localStorage.removeItem('pi_accessToken');
-                        window.location.href = 'login.html';
+                        showError('Authentication failed. Please try again.');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 3000);
+                    })
+                    .finally(() => {
+                        isAuthenticating = false;
                     });
+            }
+
+            // Update user profile
+            function updateUserProfile(username) {
+                const profile = document.getElementById('user-profile');
+                const usernameSpan = document.getElementById('username');
+                if (username) {
+                    usernameSpan.textContent = username;
+                    profile.classList.remove('hidden');
+                } else {
+                    profile.classList.add('hidden');
+                }
             }
 
             // Payment and logout handlers
             document.getElementById('pi-payment').addEventListener('click', () => {
-                alert('Please visit the subscription page to make a payment.');
-                window.location.href = 'subscribe.html';
+                showError('Redirecting to subscription page...');
+                setTimeout(() => {
+                    window.location.href = 'subscribe.html';
+                }, 1000);
             });
 
             document.getElementById('logout').addEventListener('click', () => {
                 localStorage.removeItem('pi_username');
                 localStorage.removeItem('pi_accessToken');
-                alert('You have been logged out.');
-                window.location.href = 'login.html';
+                updateUserProfile(null);
+                showError('You have been logged out.');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1000);
             });
 
             // Check authentication on page load
-            checkAuthentication();
+            if (localStorage.getItem('pi_username')) {
+                updateUserProfile(localStorage.getItem('pi_username'));
+            } else {
+                checkAuthentication();
+            }
         });
     </script>
 </body>
