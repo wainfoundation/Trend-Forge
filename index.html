@@ -11,6 +11,7 @@
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Roboto Slab', serif;
@@ -29,6 +30,58 @@
         :root {
             --economist-red: #e3120b;
             --menu-transition: all 0.3s ease-in-out;
+            --animation-delay: 0.1s;
+        }
+        /* Header animations */
+        header {
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        header.scrolled {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+        }
+        .logo {
+            animation: logoFadeIn 1s ease-out;
+        }
+        @keyframes logoFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Hamburger menu animation */
+        .hamburger {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: #1f2937;
+            transition: var(--menu-transition);
+            border-radius: 2px;
+        }
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        /* Mobile search bar */
+        #mobile-search-bar {
+            transition: var(--menu-transition);
+            max-height: 0;
+            overflow: hidden;
+        }
+        #mobile-search-bar.open {
+            max-height: 60px;
+            padding: 0.5rem 0;
         }
         /* Mobile menu container */
         #mobile-menu {
@@ -39,18 +92,25 @@
         #mobile-menu.open {
             transform: translateX(0);
         }
-        /* Menu panel */
         #mobile-menu .bg-white {
             background: linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
             box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
         }
-        /* Menu items */
         #mobile-menu .menu-item {
             min-height: 44px;
             display: flex;
             align-items: center;
             transition: var(--menu-transition);
             border-radius: 8px;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.3s ease forwards;
+        }
+        #mobile-menu.open .menu-item {
+            animation-delay: calc(var(--animation-delay) * var(--order));
+        }
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
         }
         #mobile-menu .menu-item:hover,
         #mobile-menu .menu-item:focus {
@@ -75,7 +135,7 @@
         .toggle-submenu[aria-expanded="true"] .fa-chevron-down {
             transform: rotate(180deg);
         }
-        /* Focus states for accessibility */
+        /* Focus states */
         #mobile-menu a:focus,
         #mobile-menu button:focus {
             outline: none;
@@ -87,38 +147,76 @@
         }
         #mobile-menu .fa-brands:hover {
             transform: scale(1.2);
+            color: var(--economist-red);
+        }
+        /* Content animations */
+        .animate-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .animate-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Button animations */
+        .btn-animated {
+            transition: var(--menu-transition);
+        }
+        .btn-animated:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        /* Page load animation */
+        body {
+            animation: pageLoad 0.5s ease;
+        }
+        @keyframes pageLoad {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body class="bg-white">
     <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-6">
-                <h1 class="text-3xl font-bold economist-red-text"><a href="index.html">Trend Forge</a></h1>
+            <div class="flex items-center space-x-4 md:space-x-6">
+                <h1 class="text-2xl md:text-3xl font-bold economist-red-text logo"><a href="index.html">Trend Forge</a></h1>
                 <div class="hidden md:flex space-x-6">
-                    <a href="world.html" class="text-gray-800 hover:economist-red-text font-medium">World</a>
-                    <a href="business.html" class="text-gray-800 hover:economist-red-text font-medium">Business</a>
-                    <a href="finance.html" class="text-gray-800 hover:economist-red-text font-medium">Finance</a>
-                    <a href="science.html" class="text-gray-800 hover:economist-red-text font-medium">Science</a>
-                    <a href="culture.html" class="text-gray-800 hover:economist-red-text font-medium">Culture</a>
+                    <a href="world.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">World</a>
+                    <a href="business.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">Business</a>
+                    <a href="finance.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">Finance</a>
+                    <a href="science.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">Science</a>
+                    <a href="culture.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">Culture</a>
                 </div>
             </div>
-            <div class="flex items-center space-x-4">
-                <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">
-                    <a href="search.html"><i class="fas fa-search mr-2"></i>Search</a>
+            <div class="flex items-center space-x-2 md:space-x-4">
+                <button id="mobile-search-toggle" class="bg-gray-100 text-gray-800 px-3 py-2 rounded-md hover:bg-gray-200 btn-animated md:block" aria-label="Toggle search">
+                    <i class="fas fa-search"></i>
                 </button>
-                <button class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
+                <button class="economist-red text-white px-3 py-2 rounded-md hover:bg-red-700 btn-animated hidden md:block">
                     <a href="subscribe.html">Subscribe</a>
                 </button>
-                <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
-                    <i class="fas fa-bars text-gray-800 text-xl"></i>
+                <button class="md:hidden hamburger" aria-label="Open menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
         </nav>
+        <div id="mobile-search-bar" class="container mx-auto px-4 hidden md:hidden">
+            <form class="flex space-x-2" action="search.html" aria-label="Mobile header search">
+                <label for="header-search" class="sr-only">Search</label>
+                <input id="header-search" type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
+                <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 btn-animated" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
     </header>
 
     <main class="container mx-auto px-4 py-8">
-        <section class="mb-12">
+        <section class="mb-12 animate-section">
             <h2 class="text-2xl font-bold economist-red-text mb-6">The Big Story</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="md:col-span-2 bg-white border border-gray-200">
@@ -148,7 +246,7 @@
             </div>
         </section>
 
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 animate-section">
             <div>
                 <h2 class="text-xl font-bold economist-red-text mb-4"><a href="business.html">Business</a></h2>
                 <div class="space-y-4">
@@ -182,7 +280,7 @@
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="science.html">Breakthrough in Fusion Energy</a></h3>
                         <p class="text-gray-600 text-sm mt-2">Scientists edge closer to clean energy...</p>
                     </div>
-                    <div class="bg-white border border-gray-200 p  p-4">
+                    <div class="bg-white border border-gray-200 p-4">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="science.html">AI in Healthcare Advances</a></h3>
                         <p class="text-gray-600 text-sm mt-2">New tools improve diagnostics...</p>
                     </div>
@@ -211,7 +309,7 @@
                     <h3 class="text-2xl font-bold mb-4 economist-red-text"><a href="index.html">Trend Forge</a></h3>
                     <p class="text-gray-300 mb-4">Global insights, powered by <a href="pinetwork.html" class="economist-red-text hover:underline">Pi Network</a>.</p>
                     <div class="flex space-x-4">
-                        <a href="subscribe.html" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 inline-flex items-center">
+                        <a href="subscribe.html" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 btn-animated inline-flex items-center">
                             <i class="fas fa-arrow-right mr-2"></i> Subscribe Now
                         </a>
                     </div>
@@ -226,10 +324,10 @@
                         <li><a href="culture.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-palette mr-2"></i> Culture</a></li>
                     </ul>
                     <div class="flex space-x-4">
-                        <a href="subscribe.html" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 inline-flex items-center">
+                        <a href="subscribe.html" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 btn-animated inline-flex items-center">
                             <i class="fas fa-arrow-right mr-2"></i> Subscribe
                         </a>
-                        <a href="search.html" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 inline-flex items-center">
+                        <a href="search.html" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 btn-animated inline-flex items-center">
                             <i class="fas fa-search mr-2"></i> Search
                         </a>
                     </div>
@@ -269,15 +367,15 @@
                     <form class="mb-6 flex space-x-2" aria-label="Newsletter Signup">
                         <label for="email" class="sr-only">Email address</label>
                         <input type="email" id="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-500" required>
-                        <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-red-500">
+                        <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 btn-animated">
                             <i class="fas fa-envelope"></i>
                         </button>
                     </form>
                     <div class="flex space-x-4 mb-6">
-                        <a href="https://twitter.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://linkedin.com/company/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://instagram.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://linkedin.com/company/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                     <p class="text-gray-300"><i class="fas fa-envelope mr-2"></i> <a href="mailto:contact@trendforge.com" class="hover:economist-red-text">contact@trendforge.com</a></p>
                     <p class="text-gray-300 mt-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Global News Ave, World City</p>
@@ -298,26 +396,25 @@
                 </button>
             </div>
             <nav class="space-y-2" role="navigation" aria-label="Mobile navigation">
-                <a href="index.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                <a href="index.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 1">
                     <i class="fas fa-home mr-3"></i> Home
                 </a>
-                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 2">
                     <i class="fas fa-globe mr-3"></i> World
                 </a>
-                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 3">
                     <i class="fas fa-briefcase mr-3"></i> Business
                 </a>
-                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 4">
                     <i class="fas fa-coins mr-3"></i> Finance
                 </a>
-                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 5">
                     <i class="fas fa-flask mr-3"></i> Science
                 </a>
-                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 6">
                     <i class="fas fa-palette mr-3"></i> Culture
                 </a>
-                <!-- Sub-menu for Support -->
-                <button class="w-full text-left text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="support-submenu">
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="support-submenu" style="--order: 7">
                     <i class="fas fa-question-circle mr-3"></i> Support
                     <i class="fas fa-chevron-down ml-auto transition-transform"></i>
                 </button>
@@ -326,13 +423,13 @@
                     <a href="contact.html" class="block text-gray-600 hover:economist-red-text py-2">Contact Us</a>
                     <a href="faq.html" class="block text-gray-600 hover:economist-red-text py-2">FAQ</a>
                 </div>
-                <a href="subscribe.html" class="block economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                <a href="subscribe.html" class="block economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 8">
                     <i class="fas fa-arrow-right mr-3"></i> Subscribe
                 </a>
-                <button id="pi-payment" class="w-full text-left economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                <button id="pi-payment" class="w-full text-left economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 9">
                     <i class="fas fa-money-bill-wave mr-3"></i> Make Payment
                 </button>
-                <button id="logout" class="w-full text-left economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                <button id="logout" class="w-full text-left economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center" style="--order: 10">
                     <i class="fas fa-sign-out-alt mr-3"></i> Log Out
                 </button>
             </nav>
@@ -340,16 +437,16 @@
                 <form class="flex space-x-2" action="search.html" aria-label="Mobile search">
                     <label for="mobile-search" class="sr-only">Search</label>
                     <input id="mobile-search" type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
-                    <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-red-500" aria-label="Search">
+                    <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 btn-animated" aria-label="Search">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
             </div>
             <div class="mt-8 flex space-x-4">
-                <a href="https://twitter.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="https://facebook.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                <a href="https://linkedin.com/company/trendforge" class="text-gray-600 hover:economist-red-text text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://instagram.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl btn-animated" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://facebook.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl btn-animated" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://linkedin.com/company/trendforge" class="text-gray-600 hover:economist-red-text text-xl btn-animated" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl btn-animated" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
@@ -365,18 +462,20 @@
             }
 
             if (isPiSDKAvailable()) {
-                Pi.init({ version: "2.0", sandbox: true });
+                Pi.init({ version: "2.0",检察沙箱: true });
             } else {
-                console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
-                alert('Please open this page in the Pi Network app to access documentation.');
+                console.warn('Pi SDK不可用。请在Pi网络应用中打开此页面。');
+                alert('请在Pi网络应用中打开此页面以访问文档。');
                 window.location.href = 'https://minepi.com/';
             }
 
             // Toggle mobile menu
             function toggleMobileMenu() {
                 const menu = document.getElementById('mobile-menu');
+                const hamburger = document.querySelector('.hamburger');
                 menu.classList.toggle('hidden');
                 menu.classList.toggle('open');
+                hamburger.classList.toggle('open');
                 menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
 
                 // Trap focus within menu when open
@@ -384,15 +483,22 @@
                     const focusableElements = menu.querySelectorAll('a, button, input');
                     const firstElement = focusableElements[0];
                     firstElement.focus();
-
-                    // Prevent body scroll when menu is open
                     document.body.style.overflow = 'hidden';
                 } else {
                     document.body.style.overflow = '';
                 }
             }
 
-            // Debounce function to prevent rapid clicks
+            // Toggle mobile search bar
+            function toggleMobileSearch() {
+                const searchBar = document.getElementById('mobile-search-bar');
+                searchBar.classList.toggle('open');
+                if (searchBar.classList.contains('open')) {
+                    document.getElementById('header-search').focus();
+                }
+            }
+
+            // Debounce function
             function debounce(fn, wait) {
                 let timeout;
                 return (...args) => {
@@ -413,10 +519,11 @@
             }
 
             // Event listeners
-            const menuToggle = document.querySelector('[aria-label="Open menu"]');
+            const menuToggle = document.querySelector('.hamburger');
             const menuClose = document.querySelector('.menu-close');
             const backdrop = document.getElementById('mobile-menu');
             const submenuToggle = document.querySelector('.toggle-submenu');
+            const searchToggle = document.getElementById('mobile-search-toggle');
 
             if (menuToggle) {
                 menuToggle.addEventListener('click', debounce(toggleMobileMenu, 200));
@@ -442,14 +549,25 @@
                 submenuToggle.addEventListener('click', toggleSubmenu);
             }
 
+            if (searchToggle) {
+                searchToggle.addEventListener('click', toggleMobileSearch);
+            }
+
             // Escape key support
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !document.getElementById('mobile-menu').classList.contains('hidden')) {
-                    toggleMobileMenu();
+                if (e.key === 'Escape') {
+                    const menu = document.getElementById('mobile-menu');
+                    if (!menu.classList.contains('hidden')) {
+                        toggleMobileMenu();
+                    }
+                    const searchBar = document.getElementById('mobile-search-bar');
+                    if (searchBar.classList.contains('open')) {
+                        toggleMobileSearch();
+                    }
                 }
             });
 
-            // Focus trapping for accessibility
+            // Focus trapping for menu
             document.getElementById('mobile-menu').addEventListener('keydown', (e) => {
                 if (e.key === 'Tab') {
                     const focusableElements = document.querySelectorAll('#mobile-menu a, #mobile-menu button, #mobile-menu input');
@@ -465,6 +583,28 @@
                     }
                 }
             });
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Section animations
+            const sections = document.querySelectorAll('.animate-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            sections.forEach(section => observer.observe(section));
 
             // Authentication logic
             const scopes = ['payments', 'username'];
