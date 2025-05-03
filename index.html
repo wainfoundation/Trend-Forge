@@ -1,166 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trend Forge Update - Global Insights</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Roboto Slab', serif;
-        }
-        .economist-red {
-            background-color: #e3120b;
-        }
-        .economist-red-text {
-            color: #e3120b;
-        }
-        .premium-icon::before {
-            content: '🔒 ';
-            color: #e3120b;
-        }
-        #mobile-menu {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
-        }
-        #mobile-menu.open {
-            transform: translateX(0);
-        }
-        #mobile-menu .menu-item {
-            transition: background-color 0.2s, color 0.2s;
-        }
-        #mobile-menu .menu-item:hover {
-            background-color: #f5f5f5;
-            color: #e3120b;
-        }
-        .menu-item {
-            min-height: 44px;
-            display: flex;
-            align-items: center;
-        }
-    </style>
-</head>
-<body class="bg-white">
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-6">
-                <h1 class="text-3xl font-bold economist-red-text"><a href="index.html">Trend Forge</a></h1>
-                <div class="hidden md:flex space-x-6">
-                    <a href="world.html" class="text-gray-800 hover:economist-red-text font-medium">World</a>
-                    <a href="business.html" class="text-gray-800 hover:economist-red-text font-medium">Business</a>
-                    <a href="finance.html" class="text-gray-800 hover:economist-red-text font-medium">Finance</a>
-                    <a href="science.html" class="text-gray-800 hover:economist-red-text font-medium">Science</a>
-                    <a href="culture.html" class="text-gray-800 hover:economist-red-text font-medium">Culture</a>
-                </div>
-            </div>
-            <div class="flex items-center space-x-4">
-                <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">
-                    <a href="search.html"><i class="fas fa-search mr-2"></i>Search</a>
-                </button>
-                <button class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
-                    <a href="subscribe.html">Subscribe</a>
-                </button>
-                <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
-                    <i class="fas fa-bars text-gray-800 text-xl"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <main class="container mx-auto px-4 py-8">
-        <section class="mb-12">
-            <h2 class="text-2xl font-bold economist-red-text mb-6">The Big Story</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="md:col-span-2 bg-white border border-gray-200">
-                    <img src="https://picsum.photos/800/400" alt="Main Feature" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <span class="economist-red-text text-sm font-semibold uppercase">Business</span>
-                        <h3 class="text-2xl font-bold mt-2 hover:economist-red-text cursor-pointer"><a href="business.html">Tech Titans Merge in Historic Deal</a></h3>
-                        <p class="text-gray-600 mt-2">A landmark merger reshapes Silicon Valley, with implications for global markets...</p>
-                        <div class="mt-4 flex items-center justify-between">
-                            <span class="text-sm text-gray-500">3 hours ago</span>
-                            <span class="premium-icon text-sm font-semibold">Premium</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <div class="bg-white border border-gray-200 p-4">
-                        <span class="economist-red-text text-sm font-semibold uppercase">Finance</span>
-                        <h3 class="font-semibold mt-2 hover:economist-red-text cursor-pointer"><a href="finance.html">Markets Rally Amid Policy Shifts</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">Central banks signal bold moves...</p>
-                    </div>
-                    <div class="bg-white border border-gray-200 p-4">
-                        <span class="economist-red-text text-sm font-semibold uppercase">Culture</span>
-                        <h3 class="font-semibold mt-2 hover:economist-red-text cursor-pointer"><a href="culture.html">New Art Movement Gains Traction</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">Artists embrace digital platforms...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div>
-                <h2 class="text-xl font-bold economist-red-text mb-4"><a href="business.html">Business</a></h2>
-                <div class="space-y-4">
-                    <div class="bg-white border border-gray-200 p-4">
-                        <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="business.html">Global Supply Chains Face New Hurdles</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">Logistics firms adapt to rising costs...</p>
-                    </div>
-                    <div class="bg-white border border-gray-200 p-4">
-                        <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="business.html">Startups Thrive in AI Boom</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">Venture capital pours into AI ventures...</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h2 class="text-xl font-bold economist-red-text mb-4"><a href="finance.html">Finance</a></h2>
-                <div class="space-y-4">
-                    <div class="bg-white border border-gray-200 p-4">
-                        <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="finance.html">Crypto Markets Stabilize</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">Bitcoin and Ethereum show resilience...</p>
-                    </div>
-                    <div class="bg-white border border-gray-200 p-4">
-                        <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="finance.html">Bond Yields Surge</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">Investors brace for higher rates...</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h2 class="text-xl font-bold economist-red-text mb-4"><a href="science.html">Science</a></h2>
-                <div class="space-y-4">
-                    <div class="bg-white border border-gray-200 p-4">
-                        <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="science.html">Breakthrough in Fusion Energy</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">Scientists edge closer to clean energy...</p>
-                    </div>
-                    <div class="bg-white border border-gray-200 p-4">
-                        <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="science.html">AI in Healthcare Advances</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">New tools improve diagnostics...</p>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h2 class="text-xl font-bold economist-red-text mb-4"><a href="culture.html">Culture</a></h2>
-                <div class="space-y-4">
-                    <div class="bg-white border border-gray-200 p-4">
-                        <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="culture.html">Streaming Wars Intensify</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">Platforms compete for exclusive content...</p>
-                    </div>
-                    <div class="bg-white border border-gray-200 p-4">
-                        <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="culture.html">Literature Faces Digital Shift</a></h3>
-                        <p class="text-gray-600 text-sm mt-2">E-books gain ground in publishing...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="bg-black text-white py-12">
+<footer class="bg-black text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
@@ -249,7 +87,7 @@
         <div class="bg-white h-full w-80 p-6 shadow-lg">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl font-bold economist-red-text">Trend Forge</h2>
-                <button class="text-gray-800 focus:outline-none" onclick="toggleMobileMenu()" aria-label="Close menu">
+                <button class="text-gray-800 focus:outline-none menu-close" aria-label="Close menu">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
@@ -289,143 +127,89 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
-        function isPiSDKAvailable() {
-            return typeof Pi !== 'undefined';
-        }
-
-        if (isPiSDKAvailable()) {
-            Pi.init({ version: "2.0", sandbox: true });
-        } else {
-            console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
-            alert('Please open this page in the Pi Network app to access Trend Forge.');
-            window.location.href = 'https://minepi.com/';
-        }
-
-        const axiosClient = axios.create({
-            baseURL: '/',
-            headers: {
-                'Content-Type': 'application/json'
+        document.addEventListener('DOMContentLoaded', () => {
+            function isPiSDKAvailable() {
+                return typeof Pi !== 'undefined';
             }
-        });
-        const config = {
-            headers: {
-                'X-Custom-Header': 'TrendForge'
-            }
-        };
 
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('open');
-            menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
-        }
-
-        document.querySelector('.fa-bars').parentElement.addEventListener('click', toggleMobileMenu);
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !document.getElementById('mobile-menu').classList.contains('hidden')) {
-                toggleMobileMenu();
-            }
-        });
-
-        const scopes = ['payments', 'username'];
-
-        function checkAuthentication() {
-            if (!isPiSDKAvailable()) {
-                window.location.href = 'login.html';
-                return;
-            }
-            Pi.authenticate(scopes)
-                .then(function(auth) {
-                    console.log('User authenticated:', auth);
-                    localStorage.setItem('pi_username', auth.user.username);
-                    localStorage.setItem('pi_accessToken', auth.accessToken);
-                })
-                .catch(function(error) {
-                    console.error('Authentication failed:', error);
-                    localStorage.removeItem('pi_username');
-                    localStorage.removeItem('pi_accessToken');
-                    window.location.href = 'login.html';
-                });
-        }
-
-        function onIncompletePaymentFound(payment) {
-            console.log('Incomplete payment found:', payment);
-            let paymentId = payment.identifier;
-            let txid = payment.transaction.txid;
-            $.post('/payment/complete', {
-                paymentId: paymentId,
-                txid: txid,
-                debug: 'cancel'
-            });
-            return { handled: true };
-        }
-
-        const paymentData = {
-            amount: 10,
-            memo: "Subscription payment for Trend Forge",
-            metadata: { subscriptionId: 1234, userId: "user123" }
-        };
-
-        const onReadyForServerApproval = (paymentId) => {
-            console.log("onReadyForServerApproval", paymentId);
-            axiosClient.post('/payments/approve', { paymentId }, config)
-                .then(() => console.log('Approval sent to server'))
-                .catch((error) => console.error('Approval failed:', error));
-        };
-
-        const onReadyForServerCompletion = (paymentId, txid) => {
-            console.log("onReadyForServerCompletion", paymentId, txid);
-            axiosClient.post('/payments/complete', { paymentId, txid }, config)
-                .then(() => console.log('Completion sent to server'))
-                .catch((error) => console.error('Completion failed:', error));
-        };
-
-        const paymentCallbacks = {
-            onReadyForServerApproval,
-            onReadyForServerCompletion,
-            onCancel: function(paymentId) {
-                console.log('Payment cancelled:', paymentId);
-                alert('Payment was cancelled.');
-            },
-            onError: function(error, payment) {
-                console.error('Payment error:', error, payment);
-                alert('Payment failed: ' + error.message);
-            }
-        };
-
-        document.getElementById('pi-payment').addEventListener('click', () => {
-            if (!isPiSDKAvailable()) {
-                alert('Please open this page in the Pi Network app to make payments.');
+            if (isPiSDKAvailable()) {
+                Pi.init({ version: "2.0", sandbox: true });
+            } else {
+                console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
+                alert('Please open this page in the Pi Network app to access documentation.');
                 window.location.href = 'https://minepi.com/';
-                return;
             }
-            if (!localStorage.getItem('pi_username')) {
-                alert('Please log in to make payments.');
+
+            function toggleMobileMenu() {
+                const menu = document.getElementById('mobile-menu');
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('open');
+                menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
+            }
+
+            // Attach event listener to burger button
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', toggleMobileMenu);
+            } else {
+                console.error('Menu toggle button not found.');
+            }
+
+            // Attach event listener to close button
+            const menuClose = document.querySelector('.menu-close');
+            if (menuClose) {
+                menuClose.addEventListener('click', toggleMobileMenu);
+            } else {
+                console.error('Menu close button not found.');
+            }
+
+            // Escape key support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !document.getElementById('mobile-menu').classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
+            });
+
+            const scopes = ['payments', 'username'];
+
+            function checkAuthentication() {
+                if (!isPiSDKAvailable()) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+                Pi.authenticate(scopes)
+                    .then(function(auth) {
+                        console.log('User authenticated:', auth);
+                        localStorage.setItem('pi_username', auth.user.username);
+                        localStorage.setItem('pi_accessToken', auth.accessToken);
+                        $.post('/auth/track', { 
+                            username: auth.user.username, 
+                            action: 'view_docs' 
+                        });
+                    })
+                    .catch(function(error) {
+                        console.error('Authentication failed:', error);
+                        localStorage.removeItem('pi_username');
+                        localStorage.removeItem('pi_accessToken');
+                        window.location.href = 'login.html';
+                    });
+            }
+
+            document.getElementById('pi-payment').addEventListener('click', () => {
+                alert('Please visit the subscription page to make a payment.');
+                window.location.href = 'subscribe.html';
+            });
+
+            document.getElementById('logout').addEventListener('click', () => {
+                localStorage.removeItem('pi_username');
+                localStorage.removeItem('pi_accessToken');
+                alert('You have been logged out.');
                 window.location.href = 'login.html';
-                return;
-            }
-            Pi.createPayment(paymentData, paymentCallbacks)
-                .then(function(payment) {
-                    console.log('Payment created:', payment);
-                    alert('Payment created successfully!');
-                })
-                .catch(function(error) {
-                    console.error('Payment creation failed:', error);
-                    alert('Payment creation failed: ' + error.message);
-                });
-        });
+            });
 
-        document.getElementById('logout').addEventListener('click', () => {
-            localStorage.removeItem('pi_username');
-            localStorage.removeItem('pi_accessToken');
-            alert('You have been logged out.');
-            window.location.href = 'login.html';
+            // Check authentication on page load
+            checkAuthentication();
         });
-
-        // Check authentication on page load
-        checkAuthentication();
     </script>
-    <script src="splash.js"></script>
 </body>
 </html>
