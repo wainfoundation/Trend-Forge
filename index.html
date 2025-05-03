@@ -25,24 +25,68 @@
             content: '🔒 ';
             color: #e3120b;
         }
+        /* Custom properties for theming */
+        :root {
+            --economist-red: #e3120b;
+            --menu-transition: all 0.3s ease-in-out;
+        }
+        /* Mobile menu container */
         #mobile-menu {
+            transition: var(--menu-transition);
             transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
+            backdrop-filter: blur(5px);
         }
         #mobile-menu.open {
             transform: translateX(0);
         }
+        /* Menu panel */
+        #mobile-menu .bg-white {
+            background: linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+        }
+        /* Menu items */
         #mobile-menu .menu-item {
-            transition: background-color 0.2s, color 0.2s;
-        }
-        #mobile-menu .menu-item:hover {
-            background-color: #f5f5f5;
-            color: #e3120b;
-        }
-        .menu-item {
             min-height: 44px;
             display: flex;
             align-items: center;
+            transition: var(--menu-transition);
+            border-radius: 8px;
+        }
+        #mobile-menu .menu-item:hover,
+        #mobile-menu .menu-item:focus {
+            background-color: #f5f5f5;
+            color: var(--economist-red);
+            transform: translateX(4px);
+        }
+        #mobile-menu .menu-item:active {
+            background-color: #e5e5e5;
+        }
+        /* Submenu */
+        #support-submenu {
+            transition: var(--menu-transition);
+            max-height: 0;
+            overflow: hidden;
+        }
+        #support-submenu.open {
+            max-height: 200px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+        .toggle-submenu[aria-expanded="true"] .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+        /* Focus states for accessibility */
+        #mobile-menu a:focus,
+        #mobile-menu button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--economist-red);
+        }
+        /* Social icons */
+        #mobile-menu .fa-brands {
+            transition: var(--menu-transition);
+        }
+        #mobile-menu .fa-brands:hover {
+            transform: scale(1.2);
         }
     </style>
 </head>
@@ -138,7 +182,7 @@
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="science.html">Breakthrough in Fusion Energy</a></h3>
                         <p class="text-gray-600 text-sm mt-2">Scientists edge closer to clean energy...</p>
                     </div>
-                    <div class="bg-white border border-gray-200 p-4">
+                    <div class="bg-white border border-gray-200 p  p-4">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="science.html">AI in Healthcare Advances</a></h3>
                         <p class="text-gray-600 text-sm mt-2">New tools improve diagnostics...</p>
                     </div>
@@ -224,8 +268,8 @@
                     <h3 class="text-xl font-bold mb-4 text-gray-100">Connect</h3>
                     <form class="mb-6 flex space-x-2" aria-label="Newsletter Signup">
                         <label for="email" class="sr-only">Email address</label>
-                        <input type="email" id="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none" required>
-                        <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
+                        <input type="email" id="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-red-500">
                             <i class="fas fa-envelope"></i>
                         </button>
                     </form>
@@ -246,41 +290,66 @@
     </footer>
 
     <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden z-50" id="mobile-menu" aria-hidden="true">
-        <div class="bg-white h-full w-80 p-6 shadow-lg">
+        <div class="bg-white h-full w-80 max-w-[80%] p-6 shadow-xl transform transition-transform duration-300 ease-in-out">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl font-bold economist-red-text">Trend Forge</h2>
-                <button class="text-gray-800 focus:outline-none menu-close" aria-label="Close menu">
+                <button class="text-gray-800 focus:outline-none menu-close focus:ring-2 focus:ring-red-500 rounded" aria-label="Close menu">
                     <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
             <nav class="space-y-2" role="navigation" aria-label="Mobile navigation">
-                <a href="index.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Home</a>
-                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">World</a>
-                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Business</a>
-                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Finance</a>
-                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Science</a>
-                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Culture</a>
-                <a href="subscribe.html" class="block economist-red-text font-medium py-2 px-4 rounded-md menu-item">Subscribe</a>
-                <button id="pi-payment" class="w-full text-left economist-red-text font-medium py-2 px-4 rounded-md menu-item">
-                    <i class="fas fa-money-bill-wave mr-2"></i> Make Payment
+                <a href="index.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                    <i class="fas fa-home mr-3"></i> Home
+                </a>
+                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                    <i class="fas fa-globe mr-3"></i> World
+                </a>
+                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                    <i class="fas fa-briefcase mr-3"></i> Business
+                </a>
+                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                    <i class="fas fa-coins mr-3"></i> Finance
+                </a>
+                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                    <i class="fas fa-flask mr-3"></i> Science
+                </a>
+                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                    <i class="fas fa-palette mr-3"></i> Culture
+                </a>
+                <!-- Sub-menu for Support -->
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="support-submenu">
+                    <i class="fas fa-question-circle mr-3"></i> Support
+                    <i class="fas fa-chevron-down ml-auto transition-transform"></i>
                 </button>
-                <button id="logout" class="w-full text-left economist-red-text font-medium py-2 px-4 rounded-md menu-item">
-                    <i class="fas fa-sign-out-alt mr-2"></i> Log Out
+                <div id="support-submenu" class="hidden pl-8 space-y-2" aria-hidden="true">
+                    <a href="about.html" class="block text-gray-600 hover:economist-red-text py-2">Our Mission</a>
+                    <a href="contact.html" class="block text-gray-600 hover:economist-red-text py-2">Contact Us</a>
+                    <a href="faq.html" class="block text-gray-600 hover:economist-red-text py-2">FAQ</a>
+                </div>
+                <a href="subscribe.html" class="block economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                    <i class="fas fa-arrow-right mr-3"></i> Subscribe
+                </a>
+                <button id="pi-payment" class="w-full text-left economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                    <i class="fas fa-money-bill-wave mr-3"></i> Make Payment
+                </button>
+                <button id="logout" class="w-full text-left economist-red-text font-medium py-3 px-4 rounded-md menu-item flex items-center">
+                    <i class="fas fa-sign-out-alt mr-3"></i> Log Out
                 </button>
             </nav>
-            <div class="mt-6">
+            <div class="mt-8">
                 <form class="flex space-x-2" action="search.html" aria-label="Mobile search">
-                    <input type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300" aria-label="Search input">
-                    <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700" aria-label="Search">
+                    <label for="mobile-search" class="sr-only">Search</label>
+                    <input id="mobile-search" type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
+                    <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 focus:ring-2 focus:ring-red-500" aria-label="Search">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
             </div>
-            <div class="mt-6 flex space-x-4">
-                <a href="https://twitter.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
-                <a href="https://facebook.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Facebook"><i class="fab fa-facebook text-xl"></i></a>
-                <a href="https://linkedin.com/company/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
-                <a href="https://instagram.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+            <div class="mt-8 flex space-x-4">
+                <a href="https://twitter.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://facebook.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://linkedin.com/company/trendforge" class="text-gray-600 hover:economist-red-text text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </div>
@@ -290,6 +359,7 @@
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Check if Pi SDK is available
             function isPiSDKAvailable() {
                 return typeof Pi !== 'undefined';
             }
@@ -302,27 +372,74 @@
                 window.location.href = 'https://minepi.com/';
             }
 
+            // Toggle mobile menu
             function toggleMobileMenu() {
                 const menu = document.getElementById('mobile-menu');
                 menu.classList.toggle('hidden');
                 menu.classList.toggle('open');
                 menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
+
+                // Trap focus within menu when open
+                if (!menu.classList.contains('hidden')) {
+                    const focusableElements = menu.querySelectorAll('a, button, input');
+                    const firstElement = focusableElements[0];
+                    firstElement.focus();
+
+                    // Prevent body scroll when menu is open
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
             }
 
-            // Attach event listener to burger button
-            const menuToggle = document.querySelector('.menu-toggle');
+            // Debounce function to prevent rapid clicks
+            function debounce(fn, wait) {
+                let timeout;
+                return (...args) => {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => fn.apply(this, args), wait);
+                };
+            }
+
+            // Toggle submenu
+            function toggleSubmenu(e) {
+                const button = e.currentTarget;
+                const submenu = document.getElementById('support-submenu');
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                button.setAttribute('aria-expanded', !isExpanded);
+                submenu.classList.toggle('open');
+                submenu.setAttribute('aria-hidden', isExpanded);
+            }
+
+            // Event listeners
+            const menuToggle = document.querySelector('[aria-label="Open menu"]');
+            const menuClose = document.querySelector('.menu-close');
+            const backdrop = document.getElementById('mobile-menu');
+            const submenuToggle = document.querySelector('.toggle-submenu');
+
             if (menuToggle) {
-                menuToggle.addEventListener('click', toggleMobileMenu);
+                menuToggle.addEventListener('click', debounce(toggleMobileMenu, 200));
             } else {
                 console.error('Menu toggle button not found.');
             }
 
-            // Attach event listener to close button
-            const menuClose = document.querySelector('.menu-close');
             if (menuClose) {
-                menuClose.addEventListener('click', toggleMobileMenu);
+                menuClose.addEventListener('click', debounce(toggleMobileMenu, 200));
             } else {
                 console.error('Menu close button not found.');
+            }
+
+            if (backdrop) {
+                backdrop.addEventListener('click', (e) => {
+                    if (e.target === backdrop) {
+                        toggleMobileMenu();
+                    }
+                });
+            }
+
+            if (submenuToggle) {
+                submenuToggle.addEventListener('click', toggleSubmenu);
             }
 
             // Escape key support
@@ -332,6 +449,24 @@
                 }
             });
 
+            // Focus trapping for accessibility
+            document.getElementById('mobile-menu').addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    const focusableElements = document.querySelectorAll('#mobile-menu a, #mobile-menu button, #mobile-menu input');
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+
+                    if (e.shiftKey && document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            });
+
+            // Authentication logic
             const scopes = ['payments', 'username'];
 
             function checkAuthentication() {
@@ -340,16 +475,16 @@
                     return;
                 }
                 Pi.authenticate(scopes)
-                    .then(function(auth) {
+                    .then((auth) => {
                         console.log('User authenticated:', auth);
                         localStorage.setItem('pi_username', auth.user.username);
                         localStorage.setItem('pi_accessToken', auth.accessToken);
-                        $.post('/auth/track', { 
-                            username: auth.user.username, 
-                            action: 'view_docs' 
+                        $.post('/auth/track', {
+                            username: auth.user.username,
+                            action: 'view_docs',
                         });
                     })
-                    .catch(function(error) {
+                    .catch((error) => {
                         console.error('Authentication failed:', error);
                         localStorage.removeItem('pi_username');
                         localStorage.removeItem('pi_accessToken');
@@ -357,6 +492,7 @@
                     });
             }
 
+            // Payment and logout handlers
             document.getElementById('pi-payment').addEventListener('click', () => {
                 alert('Please visit the subscription page to make a payment.');
                 window.location.href = 'subscribe.html';
