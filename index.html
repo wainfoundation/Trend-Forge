@@ -187,16 +187,30 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        /* Lazy-loaded images */
+        /* Lazy loading styles */
+        img[loading="lazy"] {
+            background: #f3f3f3;
+            transition: opacity 0.3s ease;
+        }
+        img[loading="lazy"][src] {
+            opacity: 1;
+        }
+        img[loading="lazy"]:not([src]) {
+            opacity: 0.5;
+        }
+        /* Prevent layout shifts */
         img {
-            loading: lazy;
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: attr(width) / attr(height);
         }
         /* Touch-friendly footer links */
         footer a {
             display: inline-block;
             padding: 0.5rem;
         }
-        /* Clear button for search */
+        /* Search clear button */
         .search-clear {
             display: none;
             position: absolute;
@@ -267,7 +281,7 @@
             <h2 class="text-2xl font-bold economist-red-text mb-6">The Big Story</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="md:col-span-2 bg-white border border-gray-200">
-                    <img src="https://picsum.photos/800/400" alt="Main Feature" class="w-full h-64 object-cover cursor-zoom-in">
+                    <img src="https://picsum.photos/800/400" width="800" height="400" alt="Main Feature" class="w-full h-64 object-cover cursor-zoom-in" loading="eager">
                     <div class="p-6">
                         <span class="economist-red-text text-sm font-semibold uppercase">Business</span>
                         <h3 class="text-2xl font-bold mt-2 hover:economist-red-text cursor-pointer"><a href="business.html">Tech Titans Merge in Historic Deal</a></h3>
@@ -298,10 +312,12 @@
                 <h2 class="text-xl font-bold economist-red-text mb-4"><a href="business.html">Business</a></h2>
                 <div class="space-y-4">
                     <div class="bg-white border border-gray-200 p-4">
+                        <img data-src="https://picsum.photos/400/200" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="400" height="200" alt="Supply Chain" class="w-full h-32 object-cover" loading="lazy">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="business.html">Global Supply Chains Face New Hurdles</a></h3>
                         <p class="text-gray-600 text-sm mt-2">Logistics firms adapt to rising costs...</p>
                     </div>
                     <div class="bg-white border border-gray-200 p-4">
+                        <img data-src="https://picsum.photos/400/200" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="400" height="200" alt="AI Startups" class="w-full h-32 object-cover" loading="lazy">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="business.html">Startups Thrive in AI Boom</a></h3>
                         <p class="text-gray-600 text-sm mt-2">Venture capital pours into AI ventures...</p>
                     </div>
@@ -311,10 +327,12 @@
                 <h2 class="text-xl font-bold economist-red-text mb-4"><a href="finance.html">Finance</a></h2>
                 <div class="space-y-4">
                     <div class="bg-white border border-gray-200 p-4">
+                        <img data-src="https://picsum.photos/400/200" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="400" height="200" alt="Crypto Markets" class="w-full h-32 object-cover" loading="lazy">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="finance.html">Crypto Markets Stabilize</a></h3>
                         <p class="text-gray-600 text-sm mt-2">Bitcoin and Ethereum show resilience...</p>
                     </div>
                     <div class="bg-white border border-gray-200 p-4">
+                        <img data-src="https://picsum.photos/400/200" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="400" height="200" alt="Bond Yields" class="w-full h-32 object-cover" loading="lazy">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="finance.html">Bond Yields Surge</a></h3>
                         <p class="text-gray-600 text-sm mt-2">Investors brace for higher rates...</p>
                     </div>
@@ -324,10 +342,12 @@
                 <h2 class="text-xl font-bold economist-red-text mb-4"><a href="science.html">Science</a></h2>
                 <div class="space-y-4">
                     <div class="bg-white border border-gray-200 p-4">
+                        <img data-src="https://picsum.photos/400/200" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="400" height="200" alt="Fusion Energy" class="w-full h-32 object-cover" loading="lazy">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="science.html">Breakthrough in Fusion Energy</a></h3>
                         <p class="text-gray-600 text-sm mt-2">Scientists edge closer to clean energy...</p>
                     </div>
                     <div class="bg-white border border-gray-200 p-4">
+                        <img data-src="https://picsum.photos/400/200" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="400" height="200" alt="AI Healthcare" class="w-full h-32 object-cover" loading="lazy">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="science.html">AI in Healthcare Advances</a></h3>
                         <p class="text-gray-600 text-sm mt-2">New tools improve diagnostics...</p>
                     </div>
@@ -337,10 +357,12 @@
                 <h2 class="text-xl font-bold economist-red-text mb-4"><a href="culture.html">Culture</a></h2>
                 <div class="space-y-4">
                     <div class="bg-white border border-gray-200 p-4">
+                        <img data-src="https://picsum.photos/400/200" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="400" height="200" alt="Streaming Wars" class="w-full h-32 object-cover" loading="lazy">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="culture.html">Streaming Wars Intensify</a></h3>
                         <p class="text-gray-600 text-sm mt-2">Platforms compete for exclusive content...</p>
                     </div>
                     <div class="bg-white border border-gray-200 p-4">
+                        <img data-src="https://picsum.photos/400/200" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" width="400" height="200" alt="Digital Literature" class="w-full h-32 object-cover" loading="lazy">
                         <h3 class="font-semibold hover:economist-red-text cursor-pointer"><a href="culture.html">Literature Faces Digital Shift</a></h3>
                         <p class="text-gray-600 text-sm mt-2">E-books gain ground in publishing...</p>
                     </div>
@@ -511,12 +533,33 @@
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Lazy loading fallback for older browsers
+            if (!('loading' in HTMLImageElement.prototype)) {
+                const images = document.querySelectorAll('img[loading="lazy"]');
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                            observer.unobserve(img);
+                        }
+                    });
+                }, { rootMargin: '200px' });
+
+                images.forEach(img => {
+                    img.dataset.src = img.src;
+                    img.src = img.dataset.srcPlaceholder || 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
+                    observer.observe(img);
+                });
+            }
+
             // Check if Pi SDK is available
             function isPiSDKAvailable() {
                 return typeof Pi !== 'undefined';
             }
 
-            // Initialize Pi SDK with error handling
+            // Initialize Pi SDK
             if (isPiSDKAvailable()) {
                 try {
                     Pi.init({ version: "2.0", sandbox: true });
@@ -593,7 +636,7 @@
                 };
             }
 
-            // Throttle function for scroll events
+            // Throttle function
             function throttle(fn, wait) {
                 let lastTime = 0;
                 return (...args) => {
@@ -820,7 +863,7 @@
 
             document.getElementById('logout').addEventListener('click', () => {
                 localStorage.removeItem('pi_username');
-                localStorage.removeItem('pi_accessToken');
+                localStorage.setItem('pi_accessToken', auth.accessToken);
                 updateUserProfile(null);
                 showError('You have been logged out.');
                 setTimeout(() => {
