@@ -1,0 +1,7 @@
+pi-payments/
+├── client/             # Frontend (uses Pi SDK)
+│   └── index.html / app.js
+├── server/             # Backend (Node + Express)
+│   ├── index.js
+│   └── .env
+└── package.json
