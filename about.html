@@ -2,163 +2,1014 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Trend Forge</title>
-    <!-- Tailwind CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>About - Trend Forge</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts to mimic Economist's typography -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
+            margin: 0;
         }
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Roboto Slab', serif;
+            font-family: 'PT Serif', serif;
         }
         .economist-red {
-            background-color: #e3120b; /* Economist's signature red */
+            background-color: #e3120b;
         }
         .economist-red-text {
             color: #e3120b;
         }
+        .premium-icon::before {
+            content: '🔒 ';
+            color: #e3120b;
+            font-size: 0.9em;
+            transition: var(--menu-transition);
+        }
+        .premium-icon:hover::before {
+            transform: scale(1.2);
+            color: #c81009;
+        }
+        :root {
+            --economist-red: #e3120b;
+            --economist-dark-red: #c81009;
+            --menu-transition: all 0.3s ease-in-out;
+            --animation-delay: 0.1s;
+        }
+        header {
+            transition: box-shadow 0.3s ease;
+        }
+        header.scrolled {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            animation: logoFadeIn 1s ease-out;
+        }
+        @keyframes logoFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .hamburger {
+            width: 24px;
+            height: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background: #1f2937;
+            transition: var(--menu-transition);
+            border-radius: 1px;
+        }
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        #mobile-search-bar {
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        #mobile-search-bar.open {
+            max-height: 60px;
+            padding: 0.5rem 0;
+        }
+        #mobile-menu {
+            transition: transform 0.4s ease-in-out;
+            transform: translateX(-100%);
+            -webkit-overflow-scrolling: touch;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+        #mobile-menu .bg-white {
+            background: #fff;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+            overscroll-behavior: contain;
+        }
+        #mobile-menu .menu-item {
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            transition: var(--menu-transition);
+            border-bottom: 1px solid #e5e5e5;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.3s ease forwards;
+            touch-action: manipulation;
+            position: relative;
+        }
+        #mobile-menu.open .menu-item {
+            animation-delay: calc(var(--animation-delay) * var(--order));
+        }
+        @keyframes slideIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        #mobile-menu .menu-item:hover,
+        #mobile-menu .menu-item:focus {
+            background-color: #f5f5f5;
+            color: var(--economist-red);
+            transform: translateX(4px);
+        }
+        #mobile-menu .menu-item:active {
+            background-color: #e5e5e5;
+        }
+        #mobile-menu .submenu a:hover,
+        #mobile-menu .submenu a:focus {
+            transform: scale(1.02);
+            color: var(--economist-red);
+        }
+        .submenu {
+            transition: max-height 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+            background: #fafafa;
+        }
+        .submenu.open {
+            max-height: 600px;
+            padding: 0.5rem 0;
+        }
+        .toggle-submenu[aria-expanded="true"] .fa-chevron-down {
+            transform: rotate(180deg);
+        }
+        #mobile-menu a:focus,
+        #mobile-menu button:focus,
+        .btn-animated:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--economist-red);
+        }
+        #mobile-menu .fa-brands,
+        footer .fa-brands {
+            transition: var(--menu-transition);
+        }
+        #mobile-menu .fa-brands:hover,
+        footer .fa-brands:hover {
+            transform: scale(1.2);
+            color: var(--economist-red);
+        }
+        .animate-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .animate-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .btn-animated {
+            transition: var(--menu-transition);
+            touch-action: manipulation;
+        }
+        .btn-animated:hover {
+            background-color: var(--economist-dark-red);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+        .btn-animated:active {
+            transform: scale(0.95);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            body {
+                animation: pageLoad 0.5s ease;
+            }
+        }
+        @keyframes pageLoad {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        img {
+            loading: lazy;
+        }
+        footer a {
+            display: inline-block;
+            padding: 0.5rem;
+        }
+        .search-clear {
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #e5e7eb;
+            border-radius: 50%;
+            padding: 4px;
+            transition: var(--menu-transition);
+        }
+        .search-clear:hover {
+            background: #d1d5db;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .search-wrapper:focus-within .search-clear {
+            display: block;
+        }
+        .dropdown-menu {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(8px);
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        .group:hover .dropdown-menu,
+        .group:focus-within .dropdown-menu {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .dropdown-menu a:focus {
+            background-color: #f5f5f5;
+            color: var(--economist-red);
+        }
+        .secondary-menu a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+        }
+        nav > div > a,
+        nav > div > div > button {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        nav > div > a::after,
+        nav > div > div > button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--economist-red);
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+        nav > div > a:hover::after,
+        nav > div > a:focus::after,
+        nav > div > div > button:hover::after,
+        nav > div > div > button:focus::after {
+            width: 100%;
+            left: 0;
+        }
+        .secondary-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background-color: var(--economist-dark-red);
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+        .secondary-menu a:hover::after,
+        .secondary-menu a:focus::after {
+            width: 50%;
+            left: 25%;
+        }
+        @media (max-width: 1024px) {
+            .group:hover .dropdown-menu {
+                display: none;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *:before, *:after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-white">
-    <!-- Header -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-6">
-                <h1 class="text-3xl font-bold economist-red-text"><a href="index.html">Trend Forge</a></h1>
-                <div class="hidden md:flex space-x-6">
-                    <a href="world.html" class="text-gray-800 hover:economist-red-text font-medium">World</a>
-                    <a href="business.html" class="text-gray-800 hover:economist-red-text font-medium">Business</a>
-                    <a href="finance.html" class="text-gray-800 hover:economist-red-text font-medium">Finance</a>
-                    <a href="science.html" class="text-gray-800 hover:economist-red-text font-medium">Science</a>
-                    <a href="culture.html" class="text-gray-800 hover:economist-red-text font-medium">Culture</a>
+    <header class="bg-white border-b border-gray-200 fixed top-0 w-full z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <h1 class="text-2xl font-bold economist-red-text logo"><a href="index.html">Trend Forge</a></h1>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="mobile-search-toggle" class="text-gray-800 p-2 hover:economist-red-text btn-animated" aria-label="Toggle search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="economist-red text-white px-3 py-1 text-sm rounded-sm hover:bg-red-700 btn-animated hidden lg:block">
+                        <a href="subscribe.html">Subscribe</a>
+                    </button>
+                    <button class="hamburger lg:hidden" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                 </div>
             </div>
-            <div class="flex items-center space-x-4">
-                <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">
-                    <a href="search.html"><i class="fas fa-search mr-2"></i>Search</a>
+            <nav class="hidden lg:flex justify-center mt-2">
+                <div class="flex space-x-4 items-center">
+                    <a href="world-in-brief.html" class="text-gray-800 hover:economist-red-text font-medium btn-animated">The world in brief</a>
+                    <div class="relative group">
+                        <button class="text-gray-800 hover:economist-red-text font-medium btn-animated flex items-center" aria-haspopup="true" aria-expanded="false" id="world-menu">
+                            World
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden dropdown-menu z-50" aria-labelledby="world-menu">
+                            <a href="world.html#this-week" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">The world this week</a>
+                            <a href="world.html#china" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">China</a>
+                            <a href="world.html#us" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text premium-icon">United States</a>
+                            <a href="world.html#europe" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Europe</a>
+                            <a href="world.html#britain" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text premium-icon">Britain</a>
+                            <a href="world.html#middle-east" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Middle East</a>
+                            <a href="world.html#africa" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Africa</a>
+                            <a href="world.html#asia" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Asia</a>
+                            <a href="world.html#americas" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">The Americas</a>
+                            <a href="world.html#international" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">International</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="text-gray-800 hover:economist-red-text font-medium btn-animated flex items-center" aria-haspopup="true" aria-expanded="false" id="business-menu">
+                            Business & economics
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden dropdown-menu z-50" aria-labelledby="business-menu">
+                            <a href="business.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Business</a>
+                            <a href="finance.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text premium-icon">Finance & economics</a>
+                            <a href="big-mac-index.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Big Mac index</a>
+                            <a href="indicators.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Economic & financial indicators</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="text-gray-800 hover:economist-red-text font-medium btn-animated flex items-center" aria-haspopup="true" aria-expanded="false" id="opinion-menu">
+                            Opinion
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden dropdown-menu z-50" aria-labelledby="opinion-menu">
+                            <a href="opinion.html#leaders" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Leaders</a>
+                            <a href="opinion.html#letters" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Letters to the editor</a>
+                            <a href="opinion.html#by-invitation" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text premium-icon">By Invitation</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="text-gray-800 hover:economist-red-text font-medium btn-animated flex items-center" aria-haspopup="true" aria-expanded="false" id="in-depth-menu">
+                            In depth
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden dropdown-menu z-50" aria-labelledby="in-depth-menu">
+                            <a href="science.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Science & technology</a>
+                            <a href="briefing.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text premium-icon">Briefing</a>
+                            <a href="graphic-detail.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Graphic detail</a>
+                            <a href="interactives.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Interactives</a>
+                            <a href="explains.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">The Economist explains</a>
+                            <a href="special-reports.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text premium-icon">Special reports</a>
+                            <a href="tech-quarterly.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Technology Quarterly</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="text-gray-800 hover:economist-red-text font-medium btn-animated flex items-center" aria-haspopup="true" aria-expanded="false" id="culture-menu">
+                            Culture & society
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden dropdown-menu z-50" aria-labelledby="culture-menu">
+                            <a href="culture.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Culture</a>
+                            <a href="reads.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">The Economist reads</a>
+                            <a href="obituary.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text premium-icon">Obituary</a>
+                            <a href="games.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Games</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="text-gray-800 hover:economist-red-text font-medium btn-animated flex items-center" aria-haspopup="true" aria-expanded="false" id="current-topics-menu">
+                            Current topics
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden dropdown-menu z-50" aria-labelledby="current-topics-menu">
+                            <a href="middle-east-war.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">War in the Middle East</a>
+                            <a href="ukraine-war.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">War in Ukraine</a>
+                            <a href="climate.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Climate change</a>
+                            <a href="geopolitics.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Geopolitics</a>
+                            <a href="world-economy.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text premium-icon">The world economy</a>
+                            <a href="ai.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Artificial intelligence</a>
+                            <a href="trump-tracker.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Trump approval tracker</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <nav class="hidden lg:flex justify-center mt-2 secondary-menu">
+                <div class="flex space-x-4 items-center">
+                    <a href="1843-magazine.html" class="text-gray-600 hover:economist-red-text btn-animated">1843 magazine</a>
+                    <a href="podcasts.html" class="text-gray-600 hover:economist-red-text btn-animated">Podcasts</a>
+                    <a href="video.html" class="text-gray-600 hover:economist-red-text btn-animated">Video</a>
+                    <a href="events.html" class="text-gray-600 hover:economist-red-text btn-animated">Digital events</a>
+                    <a href="newsletters.html" class="text-gray-600 hover:economist-red-text btn-animated">Newsletters</a>
+                </div>
+            </nav>
+        </div>
+        <div id="mobile-search-bar" class="container mx-auto px-4">
+            <form class="flex space-x-2 relative" action="search.html" aria-label="Header search">
+                <div class="search-wrapper flex-1 relative">
+                    <label for="header-search" class="sr-only">Search</label>
+                    <input id="header-search" type="text" placeholder="Search..." class="w-full px-4 py-2 rounded-sm text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
+                    <button type="button" class="search-clear" aria-label="Clear search">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button type="submit" class="economist-red text-white px-4 py-2 rounded-sm hover:bg-red-700 btn-animated" aria-label="Search">
+                    <i class="fas fa-search"></i>
                 </button>
-                <button class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
-                    <a href="subscribe.html">Subscribe</a>
-                </button>
-                <button class="md:hidden">
-                    <i class="fas fa-bars text-gray-800 text-xl"></i>
-                </button>
-            </div>
-        </nav>
+            </form>
+        </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
-        <section class="mb-12">
+    <main class="container mx-auto px-4 py-8 pt-24">
+        <section class="mb-12 animate-section">
             <h2 class="text-3xl font-bold economist-red-text mb-6">About Trend Forge</h2>
-            <div class="max-w-3xl mx-auto">
-                <p class="text-gray-600 text-lg mb-4">
-                    Trend Forge is a leading source of global insights, delivering in-depth analysis and authoritative reporting on the issues that shape our world. From geopolitics and economics to science and culture, we provide clarity in a complex landscape.
+            <div class="prose max-w-none">
+                <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+                <p class="text-gray-600 mb-4">
+                    At Trend Forge, we are committed to delivering insightful, data-driven journalism that illuminates global trends and fosters informed communities. Powered by the Pi Network, our platform makes premium news and analysis accessible to a worldwide audience, breaking down barriers to quality information.
                 </p>
-                <p class="text-gray-600 text-lg mb-4">
-                    Founded with a commitment to independent journalism, Trend Forge combines rigorous research with compelling storytelling. Our team of experienced journalists and analysts spans the globe, ensuring a diverse and nuanced perspective on the stories that matter.
+                <p class="text-gray-600 mb-4">
+                    Our mission is to provide clear, unbiased reporting on critical topics—from geopolitics and economics to science and culture. We strive to empower our readers with the knowledge they need to navigate an ever-changing world, while leveraging innovative technologies like Pi Network to ensure accessibility and security.
                 </p>
-                <p class="text-gray-600 text-lg mb-6">
-                    Our mission is to empower readers with the knowledge to navigate an ever-changing world. Whether you're a policymaker, business leader, or curious individual, Trend Forge is your trusted guide to understanding the forces driving change.
+                <h3 class="text-2xl font-bold mb-4">Our Values</h3>
+                <ul class="list-disc pl-6 text-gray-600 mb-4">
+                    <li><strong>Integrity</strong>: We uphold the highest standards of journalistic ethics, ensuring accuracy and impartiality.</li>
+                    <li><strong>Innovation</strong>: We embrace cutting-edge technologies to enhance accessibility and user experience.</li>
+                    <li><strong>Inclusivity</strong>: We aim to serve a global audience, making premium content available to all through Pi Network integration.</li>
+                    <li><strong>Impact</strong>: We seek to inform, inspire, and drive meaningful conversations on issues that matter.</li>
+                </ul>
+                <h3 class="text-2xl font-bold mb-4">Contact Us</h3>
+                <p class="text-gray-600 mb-4">
+                    We value your feedback and are here to assist. Whether you have questions, suggestions, or need support, please reach out to our team.
                 </p>
-                <a href="subscribe.html" class="economist-red text-white px-6 py-3 rounded-md hover:bg-red-700">
-                    Subscribe for Unlimited Access
-                </a>
-            </div>
-        </section>
-
-        <section class="mb-12">
-            <h3 class="text-2xl font-bold economist-red-text mb-6">Our Values</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white border border-gray-200 p-6">
-                    <h4 class="text-xl font-semibold mb-2">Integrity</h4>
-                    <p class="text-gray-600">We uphold the highest standards of journalistic ethics, delivering unbiased and accurate reporting.</p>
-                </div>
-                <div class="bg-white border border-gray-200 p-6">
-                    <h4 class="text-xl font-semibold mb-2">Insight</h4>
-                    <p class="text-gray-600">Our analysis goes beyond the headlines, uncovering the trends and ideas that define the future.</p>
-                </div>
-                <div class="bg-white border border-gray-200 p-6">
-                    <h4 class="text-xl font-semibold mb-2">Impact</h4>
-                    <p class="text-gray-600">We aim to inform and inspire action, equipping readers to make informed decisions.</p>
-                </div>
+                <form class="mt-4 space-y-4" aria-label="Contact Form">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-red-500 focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-red-500 focus:outline-none" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-sm focus:ring-2 focus:ring-red-500 focus:outline-none" required></textarea>
+                    </div>
+                    <button type="submit" class="economist-red text-white px-4 py-2 rounded-sm hover:bg-red-700 btn-animated">Send Message</button>
+                </form>
+                <p class="mt-4 text-gray-600">
+                    <i class="fas fa-envelope mr-2"></i> <a href="mailto:contact@trendforge.com" class="hover:economist-red-text">contact@trendforge.com</a><br>
+                    <i class="fas fa-map-marker-alt mr-2"></i> 123 Global News Ave, World City
+                </p>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white mt-12">
-        <div class="container mx-auto px-4 py-8">
+    <footer class="bg-black text-white py-12">
+        <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="text-xl font-bold mb-4">Trend Forge</h3>
-                    <p class="text-gray-400">In-depth analysis and global insights to keep you informed.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Sections</h3>
-                    <ul class="space-y-2">
-                        <li><a href="world.html" class="text-gray-400 hover:economist-red-text">World</a></li>
-                        <li><a href="business.html" class="text-gray-400 hover:economist-red-text">Business</a></li>
-                        <li><a href="finance.html" class="text-gray-400 hover:economist-red-text">Finance</a></li>
-                        <li><a href="science.html" class="text-gray-400 hover:economist-red-text">Science</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">About</h3>
-                    <ul class="space-y-2">
-                        <li><a href="about.html" class="text-gray-400 hover:economist-red-text">Our Mission</a></li>
-                        <li><a href="contact.html" class="text-gray-400 hover:economist-red-text">Contact Us</a></li>
-                        <li><a href="privacy.html" class="text-gray-400 hover:economist-red-text">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="text-gray-400 hover:economist-red-text">Terms</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+                    <h3 class="text-2xl font-bold mb-4 economist-red-text"><a href="index.html">Trend Forge</a></h3>
+                    <p class="text-gray-300 mb-4">Global insights, powered by <a href="pinetwork.html" class="economist-red-text hover:underline">Pi Network</a>.</p>
                     <div class="flex space-x-4">
-                        <a href="https://twitter.com/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-facebook"></i></a>
-                        <a href="https://linkedin.com/company/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://instagram.com/trendforge" class="text-gray-400 hover:economist-red-text text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="subscribe.html" class="economist-red text-white px-4 py-2 rounded-sm hover:bg-red-700 btn-animated inline-flex items-center">
+                            <i class="fas fa-arrow-right mr-2"></i> Subscribe Now
+                        </a>
                     </div>
                 </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-100">Explore</h3>
+                    <ul class="space-y-2 mb-4">
+                        <li><a href="world-in-brief.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-globe mr-2"></i> The world in brief</a></li>
+                        <li><a href="1843-magazine.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-book mr-2"></i> 1843 magazine</a></li>
+                        <li><a href="podcasts.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-podcast mr-2"></i> Podcasts</a></li>
+                        <li><a href="video.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-video mr-2"></i> Video</a></li>
+                        <li><a href="newsletters.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-envelope mr-2"></i> Newsletters</a></li>
+                    </ul>
+                    <div class="flex space-x-4">
+                        <a href="subscribe.html" class="bg-gray-700 text-white px-4 py-2 rounded-sm hover:bg-gray-600 btn-animated inline-flex items-center">
+                            <i class="fas fa-arrow-right mr-2"></i> Subscribe
+                        </a>
+                        <a href="search.html" class="bg-gray-700 text-white px-4 py-2 rounded-sm hover:bg-gray-600 btn-animated inline-flex items-center">
+                            <i class="fas fa-search mr-2"></i> Search
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-100">Support</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-400">About</h4>
+                            <ul class="space-y-2 mt-2">
+                                <li><a href="about.html" class="text-gray-300 hover:economist-red-text">Our Mission</a></li>
+                                <li><a href="contact.html" class="text-gray-300 hover:economist-red-text">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-400">Legal</h4>
+                            <ul class="space-y-2 mt-2">
+                                <li><a href="privacy.html" class="text-gray-300 hover:economist-red-text">Privacy Policy</a></li>
+                                <li><a href="terms.html" class="text-gray-300 hover:economist-red-text">Terms</a></li>
+                                <li><a href="security.html" class="text-gray-300 hover:economist-red-text">Security</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-gray-400">Community</h4>
+                            <ul class="space-y-2 mt-2">
+                                <li><a href="faq.html" class="text-gray-300 hover:economist-red-text">FAQ</a></li>
+                                <li><a href="contribute.html" class="text-gray-300 hover:economist-red-text">Contribute</a></li>
+                                <li><a href="code_of_conduct.html" class="text-gray-300 hover:economist-red-text">Code of Conduct</a></li>
+                                <li><a href="docs.html" class="text-gray-300 hover:economist-red-text">Documentation</a></li>
+                                <li><a href="license.html" class="text-gray-300 hover:economist-red-text">License</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-100">Connect</h3>
+                    <form class="mb-6 flex space-x-2" aria-label="Newsletter Signup">
+                        <label for="email" class="sr-only">Email address</label>
+                        <input type="email" id="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                        <button type="submit" class="economist-red text-white px-4 py-2 rounded-sm hover:bg-red-700 btn-animated">
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                    </form>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="https://twitter.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://linkedin.com/company/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-300"><i class="fas fa-envelope mr-2"></i> <a href="mailto:contact@trendforge.com" class="hover:economist-red-text">contact@trendforge.com</a></p>
+                    <p class="text-gray-300 mt-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Global News Ave, World City</p>
+                </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
                 <p>© 2025 Trend Forge. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Mobile Menu -->
-    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden" id="mobile-menu">
-        <div class="bg-white h-full w-64 p-6">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-xl font-bold economist-red-text">Menu</h2>
-                <button class="text-gray-800" onclick="document.getElementById('mobile-menu').classList.add('hidden')">
-                    <i class="fas fa-times text-xl"></i>
+    <div class="fixed inset-0 bg-white z-50 hidden" id="mobile-menu" aria-hidden="true">
+        <div class="h-full w-full p-4 overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold economist-red-text">Trend Forge</h2>
+                <button class="text-gray-800 focus:outline-none menu-close focus:ring-2 focus:ring-red-500 rounded p-2" aria-label="Close menu">
+                    <i class="fas fa-times text-2xl"></i>
                 </button>
             </div>
-            <nav class="space-y-4">
-                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium">World</a>
-                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium">Business</a>
-                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium">Finance</a>
-                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium">Science</a>
-                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium">Culture</a>
-                <a href="subscribe.html" class="block economist-red-text font-medium">Subscribe</a>
+            <div id="user-profile" class="mb-4 hidden">
+                <p class="text-gray-800 font-medium">Welcome, <span id="username"></span></p>
+            </div>
+            <form class="mb-4 flex space-x-2 relative" action="search.html" aria-label="Mobile search">
+                <div class="search-wrapper flex-1 relative">
+                    <label for="mobile-search" class="sr-only">Search</label>
+                    <input id="mobile-search" type="text" placeholder="Search..." class="w-full px-4 py-2 rounded-sm text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
+                    <button type="button" class="search-clear" aria-label="Clear search">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button type="submit" class="economist-red text-white px-4 py-2 rounded-sm hover:bg-red-700 btn-animated" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <nav class="space-y-0" role="navigation" aria-label="Mobile navigation">
+                <a href="world-in-brief.html" class="block text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item" style="--order: 1">The world in brief</a>
+                <a href="1843-magazine.html" class="block text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item" style="--order: 2">1843 magazine</a>
+                <a href="podcasts.html" class="block text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item" style="--order: 3">Podcasts</a>
+                <a href="video.html" class="block text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item" style="--order: 4">Video</a>
+                <a href="events.html" class="block text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item" style="--order: 5">Digital events</a>
+                <a href="newsletters.html" class="block text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item" style="--order: 6">Newsletters</a>
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="world-submenu" style="--order: 7">
+                    World
+                    <i class="fas fa-chevron-down ml-auto text-sm transition-transform"></i>
+                </button>
+                <div id="world-submenu" class="submenu hidden" aria-hidden="true">
+                    <a href="world.html#this-week" class="block text-gray-600 hover:economist-red-text py-2 px-8">The world this week</a>
+                    <a href="world.html#china" class="block text-gray-600 hover:economist-red-text py-2 px-8">China</a>
+                    <a href="world.html#us" class="block text-gray-600 hover:economist-red-text py-2 px-8 premium-icon">United States</a>
+                    <a href="world.html#europe" class="block text-gray-600 hover:economist-red-text py-2 px-8">Europe</a>
+                    <a href="world.html#britain" class="block text-gray-600 hover:economist-red-text py-2 px-8 premium-icon">Britain</a>
+                    <a href="world.html#middle-east" class="block text-gray-600 hover:economist-red-text py-2 px-8">Middle East</a>
+                    <a href="world.html#africa" class="block text-gray-600 hover:economist-red-text py-2 px-8">Africa</a>
+                    <a href="world.html#asia" class="block text-gray-600 hover:economist-red-text py-2 px-8">Asia</a>
+                    <a href="world.html#americas" class="block text-gray-600 hover:economist-red-text py-2 px-8">The Americas</a>
+                    <a href="world.html#international" class="block text-gray-600 hover:economist-red-text py-2 px-8">International</a>
+                </div>
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="business-submenu" style="--order: 8">
+                    Business & economics
+                    <i class="fas fa-chevron-down ml-auto text-sm transition-transform"></i>
+                </button>
+                <div id="business-submenu" class="submenu hidden" aria-hidden="true">
+                    <a href="business.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Business</a>
+                    <a href="finance.html" class="block text-gray-600 hover:economist-red-text py-2 px-8 premium-icon">Finance & economics</a>
+                    <a href="big-mac-index.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Big Mac index</a>
+                    <a href="indicators.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Economic & financial indicators</a>
+                </div>
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="opinion-submenu" style="--order: 9">
+                    Opinion
+                    <i class="fas fa-chevron-down ml-auto text-sm transition-transform"></i>
+                </button>
+                <div id="opinion-submenu" class="submenu hidden" aria-hidden="true">
+                    <a href="opinion.html#leaders" class="block text-gray-600 hover:economist-red-text py-2 px-8">Leaders</a>
+                    <a href="opinion.html#letters" class="block text-gray-600 hover:economist-red-text py-2 px-8">Letters to the editor</a>
+                    <a href="opinion.html#by-invitation" class="block text-gray-600 hover:economist-red-text py-2 px-8 premium-icon">By Invitation</a>
+                </div>
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="in-depth-submenu" style="--order: 10">
+                    In depth
+                    <i class="fas fa-chevron-down ml-auto text-sm transition-transform"></i>
+                </button>
+                <div id="in-depth-submenu" class="submenu hidden" aria-hidden="true">
+                    <a href="science.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Science & technology</a>
+                    <a href="briefing.html" class="block text-gray-600 hover:economist-red-text py-2 px-8 premium-icon">Briefing</a>
+                    <a href="graphic-detail.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Graphic detail</a>
+                    <a href="interactives.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Interactives</a>
+                    <a href="explains.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">The Economist explains</a>
+                    <a href="special-reports.html" class="block text-gray-600 hover:economist-red-text py-2 px-8 premium-icon">Special reports</a>
+                    <a href="tech-quarterly.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Technology Quarterly</a>
+                </div>
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="culture-submenu" style="--order: 11">
+                    Culture & society
+                    <i class="fas fa-chevron-down ml-auto text-sm transition-transform"></i>
+                </button>
+                <div id="culture-submenu" class="submenu hidden" aria-hidden="true">
+                    <a href="culture.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Culture</a>
+                    <a href="reads.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">The Economist reads</a>
+                    <a href="obituary.html" class="block text-gray-600 hover:economist-red-text py-2 px-8 premium-icon">Obituary</a>
+                    <a href="games.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Games</a>
+                </div>
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="current-topics-submenu" style="--order: 12">
+                    Current topics
+                    <i class="fas fa-chevron-down ml-auto text-sm transition-transform"></i>
+                </button>
+                <div id="current-topics-submenu" class="submenu hidden" aria-hidden="true">
+                    <a href="middle-east-war.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">War in the Middle East</a>
+                    <a href="ukraine-war.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">War in Ukraine</a>
+                    <a href="climate.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Climate change</a>
+                    <a href="geopolitics.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Geopolitics</a>
+                    <a href="world-economy.html" class="block text-gray-600 hover:economist-red-text py-2 px-8 premium-icon">The world economy</a>
+                    <a href="ai.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Artificial intelligence</a>
+                    <a href="trump-tracker.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Trump approval tracker</a>
+                </div>
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="weekly-submenu" style="--order: 13">
+                    Weekly edition
+                    <i class="fas fa-chevron-down ml-auto text-sm transition-transform"></i>
+                </button>
+                <div id="weekly-submenu" class="submenu hidden" aria-hidden="true">
+                    <a href="weekly.html#this-week" class="block text-gray-600 hover:economist-red-text py-2 px-8">This week</a>
+                    <a href="weekly.html#past-editions" class="block text-gray-600 hover:economist-red-text py-2 px-8 premium-icon">Past editions</a>
+                </div>
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="a-to-z-submenu" style="--order: 14">
+                    Our A-to-Zs
+                    <i class="fas fa-chevron-down ml-auto text-sm transition-transform"></i>
+                </button>
+                <div id="a-to-z-submenu" class="submenu hidden" aria-hidden="true">
+                    <a href="a-to-z.html#economics" class="block text-gray-600 hover:economist-red-text py-2 px-8">Economics</a>
+                    <a href="a-to-z.html#american-politics" class="block text-gray-600 hover:economist-red-text py-2 px-8">American politics</a>
+                    <a href="a-to-z.html#military-terms" class="block text-gray-600 hover:economist-red-text py-2 px-8">Military terms</a>
+                    <a href="a-to-z.html#international-relations" class="block text-gray-600 hover:economist-red-text py-2 px-8">International relations</a>
+                </div>
+                <button class="w-full text-left text-gray-800 hover:economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item flex items-center toggle-submenu" aria-expanded="false" aria-controls="support-submenu" style="--order: 15">
+                    Support
+                    <i class="fas fa-chevron-down ml-auto text-sm transition-transform"></i>
+                </button>
+                <div id="support-submenu" class="submenu hidden" aria-hidden="true">
+                    <a href="about.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Our Mission</a>
+                    <a href="contact.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">Contact Us</a>
+                    <a href="faq.html" class="block text-gray-600 hover:economist-red-text py-2 px-8">FAQ</a>
+                </div>
+                <a href="subscribe.html" class="block economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item" style="--order: 16">Subscribe</a>
+                <button id="pi-payment" class="w-full text-left economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item" style="--order: 17">Make Payment</button>
+                <button id="logout" class="w-full text-left economist-red-text font-bold py-3 px-4 border-b border-gray-200 menu-item" style="--order: 18">Log Out</button>
             </nav>
+            <div class="mt-4 flex space-x-4">
+                <a href="https://twitter.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl btn-animated" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://facebook.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl btn-animated" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://linkedin.com/company/trendforge" class="text-gray-600 hover:economist-red-text text-xl btn-animated" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/trendforge" class="text-gray-600 hover:economist-red-text text-xl btn-animated" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
     </div>
 
-    <!-- JavaScript for Mobile Menu -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
-        document.querySelector('.fa-bars').parentElement.addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.remove('hidden');
+        document.addEventListener('DOMContentLoaded', () => {
+            function isPiSDKAvailable() {
+                return typeof Pi !== 'undefined';
+            }
+            if (isPiSDKAvailable()) {
+                try {
+                    Pi.init({ version: "2.0", sandbox: true });
+                } catch (error) {
+                    console.error('Pi SDK initialization failed:', error);
+                    showError('Failed to initialize Pi SDK. Please try again later.');
+                }
+            } else {
+                console.warn('Pi SDK not available.');
+                showError('Please open this page in the Pi Network app.');
+                setTimeout(() => {
+                    window.location.href = 'https://minepi.com/';
+                }, 3000);
+            }
+
+            function showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-sm shadow-lg z-50';
+                errorDiv.textContent = message;
+                document.body.appendChild(errorDiv);
+                setTimeout(() => errorDiv.remove(), 5000);
+            }
+
+            let isMenuToggling = false;
+            function toggleMobileMenu() {
+                if (isMenuToggling) return;
+                isMenuToggling = true;
+                const menu = document.getElementById('mobile-menu');
+                const hamburger = document.querySelector('.hamburger');
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('open');
+                hamburger.classList.toggle('open');
+                menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
+                if (!menu.classList.contains('hidden')) {
+                    const focusableElements = menu.querySelectorAll('a, button, input');
+                    const firstElement = focusableElements[0];
+                    firstElement.focus();
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
+                setTimeout(() => isMenuToggling = false, 400);
+            }
+
+            let isSearchToggling = false;
+            function toggleMobileSearch() {
+                if (isSearchToggling) return;
+                isSearchToggling = true;
+                const searchBar = document.getElementById('mobile-search-bar');
+                searchBar.classList.toggle('open');
+                if (searchBar.classList.contains('open')) {
+                    document.getElementById('header-search').focus();
+                }
+                setTimeout(() => isSearchToggling = false, 300);
+            }
+
+            function clearSearch(inputId) {
+                const input = document.getElementById(inputId);
+                input.value = '';
+                input.focus();
+            }
+
+            function toggleSubmenu(e) {
+                const button = e.currentTarget;
+                const submenu = document.getElementById(button.getAttribute('aria-controls'));
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                button.setAttribute('aria-expanded', !isExpanded);
+                submenu.classList.toggle('open');
+                submenu.classList.toggle('hidden');
+                submenu.setAttribute('aria-hidden', isExpanded);
+            }
+
+            let touchStartX = 0;
+            let touchEndX = 0;
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 100 && !document.getElementById('mobile-menu').classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
+            }
+
+            const menuToggle = document.querySelector('.hamburger');
+            const menuClose = document.querySelector('.menu-close');
+            const backdrop = document.getElementById('mobile-menu');
+            const submenuToggles = document.querySelectorAll('.toggle-submenu');
+            const searchToggle = document.getElementById('mobile-search-toggle');
+            const searchClears = document.querySelectorAll('.search-clear');
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', toggleMobileMenu);
+                menuToggle.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+                menuToggle.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                });
+            }
+            if (menuClose) {
+                menuClose.addEventListener('click', toggleMobileMenu);
+            }
+            if (backdrop) {
+                backdrop.addEventListener('click', (e) => {
+                    if (e.target === backdrop) {
+                        toggleMobileMenu();
+                    }
+                });
+                backdrop.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                });
+                backdrop.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                });
+            }
+            submenuToggles.forEach(toggle => {
+                toggle.addEventListener('click', toggleSubmenu);
+                toggle.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleSubmenu(e);
+                    }
+                });
+            });
+            if (searchToggle) {
+                searchToggle.addEventListener('click', toggleMobileSearch);
+            }
+            searchClears.forEach(button => {
+                button.addEventListener('click', () => {
+                    const inputId = button.closest('.search-wrapper').querySelector('input').id;
+                    clearSearch(inputId);
+                });
+            });
+            document.querySelectorAll('form[action="search.html"]').forEach(form => {
+                form.addEventListener('submit', () => {
+                    const searchBar = document.getElementById('mobile-search-bar');
+                    if (searchBar.classList.contains('open')) {
+                        toggleMobileSearch();
+                    }
+                });
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    const menu = document.getElementById('mobile-menu');
+                    if (!menu.classList.contains('hidden')) {
+                        toggleMobileMenu();
+                    }
+                    const searchBar = document.getElementById('mobile-search-bar');
+                    if (searchBar.classList.contains('open')) {
+                        toggleMobileSearch();
+                    }
+                }
+            });
+
+            function trapFocus(container, e) {
+                const focusableElements = container.querySelectorAll('a, button, input, textarea');
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+                if (e.key === 'Tab') {
+                    if (e.shiftKey && document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            }
+            document.getElementById('mobile-menu').addEventListener('keydown', (e) => trapFocus(document.getElementById('mobile-menu'), e));
+            document.getElementById('mobile-search-bar').addEventListener('keydown', (e) => trapFocus(document.getElementById('mobile-search-bar'), e));
+
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            const sections = document.querySelectorAll('.animate-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            sections.forEach(section => observer.observe(section));
+
+            const scopes = ['payments', 'username'];
+            let isAuthenticating = false;
+
+            function checkAuthentication() {
+                if (isAuthenticating || !isPiSDKAvailable()) {
+                    return;
+                }
+                isAuthenticating = true;
+                Pi.authenticate(scopes)
+                    .then((auth) => {
+                        console.log('User authenticated:', auth);
+                        localStorage.setItem('pi_username', auth.user.username);
+                        localStorage.setItem('pi_accessToken', auth.accessToken);
+                        updateUserProfile(auth.user.username);
+                        $.post('/auth/track', {
+                            username: auth.user.username,
+                            action: 'view_docs',
+                        }).fail(() => {
+                            console.error('Failed to track authentication.');
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('Authentication failed:', error);
+                        localStorage.removeItem('pi_username');
+                        localStorage.removeItem('pi_accessToken');
+                        showError('Authentication failed. Please try again.');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 3000);
+                    })
+                    .finally(() => {
+                        isAuthenticating = false;
+                    });
+            }
+
+            function updateUserProfile(username) {
+                const profile = document.getElementById('user-profile');
+                const usernameSpan = document.getElementById('username');
+                if (username) {
+                    usernameSpan.textContent = username;
+                    profile.classList.remove('hidden');
+                } else {
+                    profile.classList.add('hidden');
+                }
+            }
+
+            const paymentButton = document.getElementById('pi-payment');
+            if (paymentButton) {
+                paymentButton.addEventListener('click', () => {
+                    showError('Redirecting to subscription page...');
+                    setTimeout(() => {
+                        window.location.href = 'subscribe.html';
+                    }, 1000);
+                });
+            }
+
+            const logoutButton = document.getElementById('logout');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', () => {
+                    localStorage.removeItem('pi_username');
+                    localStorage.removeItem('pi_accessToken');
+                    updateUserProfile(null);
+                    showError('You have been logged out.');
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1000);
+                });
+            }
+
+            const storedUsername = localStorage.getItem('pi_username');
+            if (storedUsername) {
+                updateUserProfile(storedUsername);
+            } else {
+                checkAuthentication();
+            }
+
+            const dropdownButtons = document.querySelectorAll('[aria-haspopup="true"]');
+            dropdownButtons.forEach(button => {
+                button.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const expanded = button.getAttribute('aria-expanded') === 'true';
+                        button.setAttribute('aria-expanded', !expanded);
+                        const menu = button.nextElementSibling;
+                        menu.classList.toggle('hidden');
+                        if (!expanded) {
+                            const firstItem = menu.querySelector('a');
+                            if (firstItem) firstItem.focus();
+                        }
+                    }
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.group')) {
+                    dropdownButtons.forEach(button => {
+                        button.setAttribute('aria-expanded', 'false');
+                        const menu = button.nextElementSibling;
+                        if (menu) menu.classList.add('hidden');
+                    });
+                }
+            });
+
+            document.querySelectorAll('nav > div > a, nav > div > div > button, .secondary-menu a, #mobile-menu .menu-item, #mobile-menu .submenu a').forEach(element => {
+                element.addEventListener('touchstart', () => {
+                    element.classList.add('hover');
+                    setTimeout(() => element.classList.remove('hover'), 500);
+                });
+            });
+
+            const contactForm = document.querySelector('form[aria-label="Contact Form"]');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    showError('Thank you for your message! We will get back to you soon.');
+                    contactForm.reset();
+                });
+            }
         });
     </script>
 </body>
