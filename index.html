@@ -6,8 +6,15 @@
     <title>Trend Forge - Global Insights</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Roboto:wght@400;500;700&display=swap">
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        :root {
+            --economist-red: #e3120b;
+            --economist-dark-red: #c81009;
+            --menu-transition: all 0.3s ease-in-out;
+            --animation-delay: 0.1s;
+        }
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
@@ -18,26 +25,20 @@
             font-family: 'PT Serif', serif;
         }
         .economist-red {
-            background-color: #e3120b;
+            background-color: var(--economist-red);
         }
         .economist-red-text {
-            color: #e3120b;
+            color: var(--economist-red);
         }
         .premium-icon::before {
             content: '🔒 ';
-            color: #e3120b;
+            color: var(--economist-red);
             font-size: 0.9em;
             transition: var(--menu-transition);
         }
         .premium-icon:hover::before {
             transform: scale(1.2);
-            color: #c81009;
-        }
-        :root {
-            --economist-red: #e3120b;
-            --economist-dark-red: #c81009;
-            --menu-transition: all 0.3s ease-in-out;
-            --animation-delay: 0.1s;
+            color: var(--economist-dark-red);
         }
         header {
             transition: box-shadow 0.3s ease;
@@ -90,14 +91,12 @@
             transition: transform 0.4s ease-in-out;
             transform: translateX(-100%);
             -webkit-overflow-scrolling: touch;
-        }
-        #mobile-menu.open {
-            transform: translateX(0);
-        }
-        #mobile-menu .bg-white {
             background: #fff;
             box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
             overscroll-behavior: contain;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
         }
         #mobile-menu .menu-item {
             min-height: 48px;
@@ -118,7 +117,7 @@
             to { opacity: 1; transform: translateX(0); }
         }
         #mobile-menu .menu-item:hover,
-        #mobile-menu .menu-item:focus {
+`focus {
             background-color: #f5f5f5;
             color: var(--economist-red);
             transform: translateX(4px);
@@ -237,7 +236,6 @@
             font-weight: 500;
             position: relative;
         }
-        /* Primary Menu Hover Underline */
         nav > div > a,
         nav > div > div > button {
             position: relative;
@@ -261,7 +259,6 @@
             width: 100%;
             left: 0;
         }
-        /* Secondary Menu Hover Underline */
         .secondary-menu a::after {
             content: '';
             position: absolute;
@@ -280,6 +277,13 @@
         @media (max-width: 1024px) {
             .group:hover .dropdown-menu {
                 display: none;
+            }
+            .group:active .dropdown-menu,
+            .group:focus-within .dropdown-menu {
+                display: block;
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
             }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -410,7 +414,7 @@
             </nav>
         </div>
         <div id="mobile-search-bar" class="container mx-auto px-4">
-            <form class="flex space-x-2 relative" action="search.html" aria-label="Header search">
+            <form class="flex space-x-2 relative" action="search.html" aria-label="Header search" role="search">
                 <div class="search-wrapper flex-1 relative">
                     <label for="header-search" class="sr-only">Search</label>
                     <input id="header-search" type="text" placeholder="Search..." class="w-full px-4 py-2 rounded-sm text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
@@ -430,7 +434,7 @@
             <h2 class="text-2xl font-bold economist-red-text mb-6">The world in brief</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="md:col-span-2 bg-white border border-gray-200">
-                    <img src="https://picsum.photos/800/400" alt="Main Feature" class="w-full h-64 object-cover cursor-zoom-in">
+                    <img src="https://picsum.photos/800/400" alt="Main Feature Image" class="w-full h-64 object-cover cursor-zoom-in" tabindex="0">
                     <div class="p-6">
                         <span class="economist-red-text text-sm font-semibold uppercase">Business</span>
                         <h3 class="text-2xl font-bold mt-2 hover:economist-red-text cursor-pointer"><a href="business.html">Tech Titans Merge in Historic Deal</a></h3>
@@ -597,8 +601,8 @@
         </div>
     </footer>
 
-    <div class="fixed inset-0 bg-white z-50 hidden" id="mobile-menu" aria-hidden="true">
-        <div class="h-full w-full p-4 overflow-y-auto">
+    <div class="fixed inset-0 z-50 hidden" id="mobile-menu" aria-hidden="true">
+        <div class="h-full w-full p-4 overflow-y-auto bg-white">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-2xl font-bold economist-red-text">Trend Forge</h2>
                 <button class="text-gray-800 focus:outline-none menu-close focus:ring-2 focus:ring-red-500 rounded p-2" aria-label="Close menu">
@@ -608,7 +612,7 @@
             <div id="user-profile" class="mb-4 hidden">
                 <p class="text-gray-800 font-medium">Welcome, <span id="username"></span></p>
             </div>
-            <form class="mb-4 flex space-x-2 relative" action="search.html" aria-label="Mobile search">
+            <form class="mb-4 flex space-x-2 relative" action="search.html" aria-label="Mobile search" role="search">
                 <div class="search-wrapper flex-1 relative">
                     <label for="mobile-search" class="sr-only">Search</label>
                     <input id="mobile-search" type="text" placeholder="Search..." class="w-full px-4 py-2 rounded-sm text-gray-800 focus:outline-none border border-gray-300 focus:ring-2 focus:ring-red-500" aria-label="Search input">
@@ -738,15 +742,29 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Pi SDK Check
-            function isPiSDKAvailable() {
-                return typeof Pi !== 'undefined';
-            }
+            // Utility Functions
+            const showError = (message) => {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-sm shadow-lg z-50';
+                errorDiv.textContent = message;
+                document.body.appendChild(errorDiv);
+                setTimeout(() => errorDiv.remove(), 5000);
+            };
+
+            const showNotification = (message) => {
+                const notifDiv = document.createElement('div');
+                notifDiv.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-sm shadow-lg z-50';
+                notifDiv.textContent = message;
+                document.body.appendChild(notifDiv);
+                setTimeout(() => notifDiv.remove(), 3000);
+            };
+
+            // Pi SDK Initialization
+            const isPiSDKAvailable = () => typeof Pi !== 'undefined';
             if (isPiSDKAvailable()) {
                 try {
                     Pi.init({ version: "2.0", sandbox: true });
@@ -757,22 +775,12 @@
             } else {
                 console.warn('Pi SDK not available.');
                 showError('Please open this page in the Pi Network app.');
-                setTimeout(() => {
-                    window.location.href = 'https://minepi.com/';
-                }, 3000);
+                setTimeout(() => window.location.href = 'https://minepi.com/', 3000);
             }
 
-            function showError(message) {
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-sm shadow-lg z-50';
-                errorDiv.textContent = message;
-                document.body.appendChild(errorDiv);
-                setTimeout(() => errorDiv.remove(), 5000);
-            }
-
-            // Toggle Mobile Menu
+            // Mobile Menu Toggle
             let isMenuToggling = false;
-            function toggleMobileMenu() {
+            const toggleMobileMenu = () => {
                 if (isMenuToggling) return;
                 isMenuToggling = true;
                 const menu = document.getElementById('mobile-menu');
@@ -781,20 +789,17 @@
                 menu.classList.toggle('open');
                 hamburger.classList.toggle('open');
                 menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
+                document.body.style.overflow = menu.classList.contains('hidden') ? '' : 'hidden';
                 if (!menu.classList.contains('hidden')) {
-                    const focusableElements = menu.querySelectorAll('a, button, input');
-                    const firstElement = focusableElements[0];
-                    firstElement.focus();
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
+                    const firstElement = menu.querySelector('a, button, input');
+                    firstElement?.focus();
                 }
                 setTimeout(() => isMenuToggling = false, 400);
-            }
+            };
 
-            // Toggle Mobile Search Bar
+            // Mobile Search Toggle
             let isSearchToggling = false;
-            function toggleMobileSearch() {
+            const toggleMobileSearch = () => {
                 if (isSearchToggling) return;
                 isSearchToggling = true;
                 const searchBar = document.getElementById('mobile-search-bar');
@@ -803,17 +808,17 @@
                     document.getElementById('header-search').focus();
                 }
                 setTimeout(() => isSearchToggling = false, 300);
-            }
+            };
 
             // Clear Search Input
-            function clearSearch(inputId) {
+            const clearSearch = (inputId) => {
                 const input = document.getElementById(inputId);
                 input.value = '';
                 input.focus();
-            }
+            };
 
-            // Toggle Submenu
-            function toggleSubmenu(e) {
+            // Submenu Toggle
+            const toggleSubmenu = (e) => {
                 const button = e.currentTarget;
                 const submenu = document.getElementById(button.getAttribute('aria-controls'));
                 const isExpanded = button.getAttribute('aria-expanded') === 'true';
@@ -821,16 +826,17 @@
                 submenu.classList.toggle('open');
                 submenu.classList.toggle('hidden');
                 submenu.setAttribute('aria-hidden', isExpanded);
-            }
+            };
 
             // Swipe to Close Menu
             let touchStartX = 0;
             let touchEndX = 0;
-            function handleSwipe() {
-                if (touchEndX < touchStartX - 100 && !document.getElementById('mobile-menu').classList.contains('hidden')) {
+            const handleSwipe = () => {
+                const swipeDistance = touchStartX - touchEndX;
+                if (swipeDistance > 100 && !document.getElementById('mobile-menu').classList.contains('hidden')) {
                     toggleMobileMenu();
                 }
-            }
+            };
 
             // Event Listeners
             const menuToggle = document.querySelector('.hamburger');
@@ -840,33 +846,21 @@
             const searchToggle = document.getElementById('mobile-search-toggle');
             const searchClears = document.querySelectorAll('.search-clear');
 
-            if (menuToggle) {
-                menuToggle.addEventListener('click', toggleMobileMenu);
-                menuToggle.addEventListener('touchstart', (e) => {
-                    touchStartX = e.changedTouches[0].screenX;
-                });
-                menuToggle.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    handleSwipe();
-                });
-            }
-            if (menuClose) {
-                menuClose.addEventListener('click', toggleMobileMenu);
-            }
-            if (backdrop) {
-                backdrop.addEventListener('click', (e) => {
-                    if (e.target === backdrop) {
-                        toggleMobileMenu();
-                    }
-                });
-                backdrop.addEventListener('touchstart', (e) => {
-                    touchStartX = e.changedTouches[0].screenX;
-                });
-                backdrop.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    handleSwipe();
-                });
-            }
+            menuToggle?.addEventListener('click', toggleMobileMenu);
+            menuToggle?.addEventListener('touchstart', (e) => touchStartX = e.changedTouches[0].screenX);
+            menuToggle?.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            menuClose?.addEventListener('click', toggleMobileMenu);
+            backdrop?.addEventListener('click', (e) => {
+                if (e.target === backdrop) toggleMobileMenu();
+            });
+            backdrop?.addEventListener('touchstart', (e) => touchStartX = e.changedTouches[0].screenX);
+            backdrop?.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
             submenuToggles.forEach(toggle => {
                 toggle.addEventListener('click', toggleSubmenu);
                 toggle.addEventListener('keydown', (e) => {
@@ -876,37 +870,32 @@
                     }
                 });
             });
-            if (searchToggle) {
-                searchToggle.addEventListener('click', toggleMobileSearch);
-            }
+            searchToggle?.addEventListener('click', toggleMobileSearch);
             searchClears.forEach(button => {
                 button.addEventListener('click', () => {
                     const inputId = button.closest('.search-wrapper').querySelector('input').id;
                     clearSearch(inputId);
                 });
             });
+
             document.querySelectorAll('form[action="search.html"]').forEach(form => {
                 form.addEventListener('submit', () => {
                     const searchBar = document.getElementById('mobile-search-bar');
-                    if (searchBar.classList.contains('open')) {
-                        toggleMobileSearch();
-                    }
+                    if (searchBar.classList.contains('open')) toggleMobileSearch();
                 });
             });
+
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     const menu = document.getElementById('mobile-menu');
-                    if (!menu.classList.contains('hidden')) {
-                        toggleMobileMenu();
-                    }
+                    if (!menu.classList.contains('hidden')) toggleMobileMenu();
                     const searchBar = document.getElementById('mobile-search-bar');
-                    if (searchBar.classList.contains('open')) {
-                        toggleMobileSearch();
-                    }
+                    if (searchBar.classList.contains('open')) toggleMobileSearch();
                 }
             });
 
-            function trapFocus(container, e) {
+            // Focus Trap
+            const trapFocus = (container, e) => {
                 const focusableElements = container.querySelectorAll('a, button, input');
                 const firstElement = focusableElements[0];
                 const lastElement = focusableElements[focusableElements.length - 1];
@@ -919,19 +908,17 @@
                         firstElement.focus();
                     }
                 }
-            }
+            };
             document.getElementById('mobile-menu').addEventListener('keydown', (e) => trapFocus(document.getElementById('mobile-menu'), e));
             document.getElementById('mobile-search-bar').addEventListener('keydown', (e) => trapFocus(document.getElementById('mobile-search-bar'), e));
 
+            // Scroll Header Effect
             window.addEventListener('scroll', () => {
                 const header = document.querySelector('header');
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+                header.classList.toggle('scrolled', window.scrollY > 50);
             });
 
+            // Section Animation
             const sections = document.querySelectorAll('.animate-section');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -943,56 +930,65 @@
             }, { threshold: 0.2 });
             sections.forEach(section => observer.observe(section));
 
+            // Image Zoom (with Keyboard Support)
             document.querySelectorAll('img').forEach(img => {
-                img.addEventListener('click', () => {
-                    img.classList.toggle('zoomed');
-                    if (img.classList.contains('zoomed')) {
-                        img.style.transform = 'scale(1.5)';
-                        img.style.zIndex = '1000';
-                    } else {
-                        img.style.transform = 'scale(1)';
-                        img.style.zIndex = 'auto';
+                img.setAttribute('tabindex', '0');
+                img.addEventListener('click', () => toggleImageZoom(img));
+                img.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleImageZoom(img);
                     }
                 });
             });
+
+            const toggleImageZoom = (img) => {
+                img.classList.toggle('zoomed');
+                img.style.transform = img.classList.contains('zoomed') ? 'scale(1.5)' : 'scale(1)';
+                img.style.zIndex = img.classList.contains('zoomed') ? '1000' : 'auto';
+            };
 
             // Authentication Logic
             const scopes = ['payments', 'username'];
             let isAuthenticating = false;
 
-            function checkAuthentication() {
-                if (isAuthenticating || !isPiSDKAvailable()) {
-                    return;
-                }
+            const onIncompletePaymentFound = (payment) => {
+                console.log('Incomplete payment found:', payment);
+                const paymentId = payment.identifier;
+                const txid = payment.transaction?.txid;
+                $.post('/payment/complete', {
+                    paymentId,
+                    txid,
+                    debug: 'cancel'
+                }).fail(() => console.error('Failed to complete payment.'));
+            };
+
+            const checkAuthentication = () => {
+                if (isAuthenticating || !isPiSDKAvailable()) return;
                 isAuthenticating = true;
-                Pi.authenticate(scopes)
+                Pi.authenticate(scopes, onIncompletePaymentFound)
                     .then((auth) => {
                         console.log('User authenticated:', auth);
+                        console.warn('Storing accessToken in localStorage is insecure. Consider server-side storage in production.');
                         localStorage.setItem('pi_username', auth.user.username);
                         localStorage.setItem('pi_accessToken', auth.accessToken);
                         updateUserProfile(auth.user.username);
                         $.post('/auth/track', {
                             username: auth.user.username,
-                            action: 'view_docs',
-                        }).fail(() => {
-                            console.error('Failed to track authentication.');
-                        });
+                            action: 'view_docs'
+                        }).fail(() => console.error('Failed to track authentication.'));
                     })
                     .catch((error) => {
                         console.error('Authentication failed:', error);
                         localStorage.removeItem('pi_username');
                         localStorage.removeItem('pi_accessToken');
                         showError('Authentication failed. Please try again.');
-                        setTimeout(() => {
-                            window.location.href = 'login.html';
-                        }, 3000);
+                        setTimeout(() => window.location.href = 'login.html', 3000);
                     })
-                    .finally(() => {
-                        isAuthenticating = false;
-                    });
-            }
+                    .finally(() => isAuthenticating = false);
+            };
 
-            function updateUserProfile(username) {
+            const updateUserProfile = (username) => {
                 const profile = document.getElementById('user-profile');
                 const usernameSpan = document.getElementById('username');
                 if (username) {
@@ -1001,32 +997,22 @@
                 } else {
                     profile.classList.add('hidden');
                 }
-            }
+            };
 
             // Payment Handler
-            const paymentButton = document.getElementById('pi-payment');
-            if (paymentButton) {
-                paymentButton.addEventListener('click', () => {
-                    showError('Redirecting to subscription page...');
-                    setTimeout(() => {
-                        window.location.href = 'subscribe.html';
-                    }, 1000);
-                });
-            }
+            document.getElementById('pi-payment')?.addEventListener('click', () => {
+                showNotification('Redirecting to subscription page...');
+                setTimeout(() => window.location.href = 'subscribe.html', 1000);
+            });
 
             // Logout Handler
-            const logoutButton = document.getElementById('logout');
-            if (logoutButton) {
-                logoutButton.addEventListener('click', () => {
-                    localStorage.removeItem('pi_username');
-                    localStorage.removeItem('pi_accessToken');
-                    updateUserProfile(null);
-                    showError('You have been logged out.');
-                    setTimeout(() => {
-                        window.location.href = 'login.html';
-                    }, 1000);
-                });
-            }
+            document.getElementById('logout')?.addEventListener('click', () => {
+                localStorage.removeItem('pi_username');
+                localStorage.removeItem('pi_accessToken');
+                updateUserProfile(null);
+                showNotification('You have been logged out.');
+                setTimeout(() => window.location.href = 'login.html', 1000);
+            });
 
             // Check Authentication on Load
             const storedUsername = localStorage.getItem('pi_username');
@@ -1048,7 +1034,7 @@
                         menu.classList.toggle('hidden');
                         if (!expanded) {
                             const firstItem = menu.querySelector('a');
-                            if (firstItem) firstItem.focus();
+                            firstItem?.focus();
                         }
                     }
                 });
@@ -1060,15 +1046,14 @@
                     dropdownButtons.forEach(button => {
                         button.setAttribute('aria-expanded', 'false');
                         const menu = button.nextElementSibling;
-                        if (menu) menu.classList.add('hidden');
+                        menu?.classList.add('hidden');
                     });
                 }
             });
 
-            // Ensure Hover Effects Work for Touch Devices
+            // Touch Support for Hover Effects
             document.querySelectorAll('nav > div > a, nav > div > div > button, .secondary-menu a, #mobile-menu .menu-item, #mobile-menu .submenu a').forEach(element => {
                 element.addEventListener('touchstart', () => {
-                    // Trigger hover styles on touch
                     element.classList.add('hover');
                     setTimeout(() => element.classList.remove('hover'), 500);
                 });
