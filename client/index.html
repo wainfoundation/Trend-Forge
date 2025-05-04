@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pi Payment Demo</title>
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+</head>
+<body>
+  <h1>Buy Premium (10 Pi)</h1>
+  <button onclick="startPayment()">Pay Now</button>
+
+  <script>
+    async function startPayment() {
+      Pi.createPayment({
+        amount: 10,
+        memo: "Buy Premium Plan",
+        metadata: { plan: "premium" }
+      }, {
+        onReadyForServerApproval: async (paymentId) => {
+          await fetch("http://localhost:5000/approve", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ paymentId })
+          });
+        },
+        onReadyForServerCompletion: async (paymentId, txId) => {
+          await fetch("http://localhost:5000/complete", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ paymentId, txId })
+          });
+        },
+        onCancel: (paymentId) => {
+          fetch("http://localhost:5000/cancel", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ paymentId })
+          });
+        },
+        onError: (error, payment) => {
+          console.error("Error:", error);
+        },
+        onIncompletePaymentFound: async (payment) => {
+          await fetch("http://localhost:5000/incomplete", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ payment })
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
