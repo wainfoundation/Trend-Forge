@@ -27,9 +27,15 @@
             content: '🔒 ';
             color: #e3120b;
             font-size: 0.9em;
+            transition: var(--menu-transition);
+        }
+        .premium-icon:hover::before {
+            transform: scale(1.2);
+            color: #c81009;
         }
         :root {
             --economist-red: #e3120b;
+            --economist-dark-red: #c81009;
             --menu-transition: all 0.3s ease-in-out;
             --animation-delay: 0.1s;
         }
@@ -103,6 +109,7 @@
             transform: translateX(-20px);
             animation: slideIn 0.3s ease forwards;
             touch-action: manipulation;
+            position: relative;
         }
         #mobile-menu.open .menu-item {
             animation-delay: calc(var(--animation-delay) * var(--order));
@@ -114,9 +121,15 @@
         #mobile-menu .menu-item:focus {
             background-color: #f5f5f5;
             color: var(--economist-red);
+            transform: translateX(4px);
         }
         #mobile-menu .menu-item:active {
             background-color: #e5e5e5;
+        }
+        #mobile-menu .submenu a:hover,
+        #mobile-menu .submenu a:focus {
+            transform: scale(1.02);
+            color: var(--economist-red);
         }
         .submenu {
             transition: max-height 0.3s ease;
@@ -160,7 +173,9 @@
             touch-action: manipulation;
         }
         .btn-animated:hover {
-            background-color: #c81009;
+            background-color: var(--economist-dark-red);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
         }
         .btn-animated:active {
             transform: scale(0.95);
@@ -190,17 +205,25 @@
             background: #e5e7eb;
             border-radius: 50%;
             padding: 4px;
+            transition: var(--menu-transition);
+        }
+        .search-clear:hover {
+            background: #d1d5db;
+            transform: translateY(-50%) scale(1.1);
         }
         .search-wrapper:focus-within .search-clear {
             display: block;
         }
         .dropdown-menu {
             transition: opacity 0.3s ease, transform 0.3s ease;
-            transform: translateY(10px);
+            transform: translateY(8px);
             opacity: 0;
             pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
         }
-        .group:hover .dropdown-menu {
+        .group:hover .dropdown-menu,
+        .group:focus-within .dropdown-menu {
             transform: translateY(0);
             opacity: 1;
             pointer-events: auto;
@@ -209,14 +232,55 @@
             background-color: #f5f5f5;
             color: var(--economist-red);
         }
+        .secondary-menu a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+        }
+        /* Primary Menu Hover Underline */
+        nav > div > a,
+        nav > div > div > button {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        nav > div > a::after,
+        nav > div > div > button::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--economist-red);
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+        nav > div > a:hover::after,
+        nav > div > a:focus::after,
+        nav > div > div > button:hover::after,
+        nav > div > div > button:focus::after {
+            width: 100%;
+            left: 0;
+        }
+        /* Secondary Menu Hover Underline */
+        .secondary-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background-color: var(--economist-dark-red);
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+        .secondary-menu a:hover::after,
+        .secondary-menu a:focus::after {
+            width: 50%;
+            left: 25%;
+        }
         @media (max-width: 1024px) {
             .group:hover .dropdown-menu {
                 display: none;
             }
-        }
-        .secondary-menu a {
-            font-size: 0.9rem;
-            font-weight: 500;
         }
         @media (prefers-reduced-motion: reduce) {
             *, *:before, *:after {
@@ -297,7 +361,7 @@
                             <i class="fas fa-chevron-down ml-1 text-sm"></i>
                         </button>
                         <div class="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg hidden dropdown-menu z-50" aria-labelledby="in-depth-menu">
-                            <a href="science.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Science &.AUTHOR technology</a>
+                            <a href="science.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Science & technology</a>
                             <a href="briefing.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text premium-icon">Briefing</a>
                             <a href="graphic-detail.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Graphic detail</a>
                             <a href="interactives.html" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 hover:economist-red-text">Interactives</a>
@@ -999,6 +1063,15 @@
                         if (menu) menu.classList.add('hidden');
                     });
                 }
+            });
+
+            // Ensure Hover Effects Work for Touch Devices
+            document.querySelectorAll('nav > div > a, nav > div > div > button, .secondary-menu a, #mobile-menu .menu-item, #mobile-menu .submenu a').forEach(element => {
+                element.addEventListener('touchstart', () => {
+                    // Trigger hover styles on touch
+                    element.classList.add('hover');
+                    setTimeout(() => element.classList.remove('hover'), 500);
+                });
             });
         });
     </script>
