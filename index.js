@@ -4,6 +4,8 @@ const fetch = require('node-fetch');
 const cors = require('cors');
 const { body, validationResult } = require('express-validator');
 const winston = require('winston');
+const cors = require('cors');
+app.use(cors());
 
 // Initialize Express app
 const app = express();
