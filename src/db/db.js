@@ -1,7 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./payments.db');
 
-// Initialize database
 db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS payments (
@@ -20,6 +19,14 @@ db.serialize(() => {
             user_uid TEXT PRIMARY KEY,
             isSubscribed BOOLEAN,
             subscription_end TEXT
+        )
+    `);
+    db.run(`
+        CREATE TABLE IF NOT EXISTS auth_events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT,
+            action TEXT,
+            created_at TEXT
         )
     `);
 });
