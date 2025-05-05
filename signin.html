@@ -2,90 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Trend Forge</title>
-    <!-- Tailwind CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sign In - Trend Forge</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Roboto:wght@400;500;700&display=swap">
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        :root {
+            --economist-red: #e3120b;
+            --economist-dark-red: #c81009;
+            --menu-transition: all 0.3s ease-in-out;
+        }
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
+            margin: 0;
+            background-color: #f9fafb;
         }
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Roboto Slab', serif;
+            font-family: 'PT Serif', serif;
         }
         .economist-red {
-            background-color: #e3120b;
+            background-color: var(--economist-red);
         }
         .economist-red-text {
-            color: #e3120b;
+            color: var(--economist-red);
         }
-        #mobile-menu {
-            transform: translateX(-100%);
-            transition: transform 0.3s ease-in-out;
+        /* Header Styles */
+        header {
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e7eb;
         }
-        #mobile-menu.open {
-            transform: translateX(0);
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
-        #mobile-menu .menu-item {
-            transition: background-color 0.2s, color 0.2s;
+        /* Logo Animation */
+        .logo {
+            animation: logoFadeIn 0.8s ease-out;
         }
-        #mobile-menu .menu-item:hover {
-            background-color: #f5f5f5;
-            color: #e3120b;
+        @keyframes logoFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .menu-item {
-            min-height: 44px;
-            display: flex;
-            align-items: center;
+        /* Buttons */
+        .btn-animated {
+            transition: var(--menu-transition);
+        }
+        .btn-animated:hover {
+            background-color: var(--economist-dark-red);
+            transform: translateY(-1px);
+        }
+        .btn-animated:active {
+            transform: translateY(1px);
+        }
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        .overlay.active {
+            display: block;
+        }
+        /* Accessibility */
+        :focus-visible {
+            outline: 2px solid var(--economist-red);
+            outline-offset: 2px;
+        }
+        /* Responsive Adjustments */
+        @media (prefers-reduced-motion: reduce) {
+            *, *:before, *:after {
+                animation: none !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
-<body class="bg-white">
-    <!-- Header -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-6">
-                <h1 class="text-3xl font-bold economist-red-text"><a href="index.html">Trend Forge</a></h1>
-                <div class="hidden md:flex space-x-6">
-                    <a href="world.html" class="text-gray-800 hover:economist-red-text font-medium">World</a>
-                    <a href="business.html" class="text-gray-800 hover:economist-red-text font-medium">Business</a>
-                    <a href="finance.html" class="text-gray-800 hover:economist-red-text font-medium">Finance</a>
-                    <a href="science.html" class="text-gray-800 hover:economist-red-text font-medium">Science</a>
-                    <a href="culture.html" class="text-gray-800 hover:economist-red-text font-medium">Culture</a>
+<body>
+    <header class="fixed top-0 w-full z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center space-x-2 logo">
+                    <h1 class="text-2xl font-bold economist-red-text">Trend Forge</h1>
+                    <span class="text-sm text-gray-500 hidden md:block">Global Insights</span>
+                </a>
+                <div class="flex items-center space-x-4">
+                    <a href="subscribe.html" class="economist-red text-white px-4 py-1 rounded-sm hover:bg-red-700 btn-animated">Subscribe</a>
                 </div>
             </div>
-            <div class="flex items-center space-x-4">
-                <button class="bg-gray-100 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200">
-                    <a href="search.html"><i class="fas fa-search mr-2"></i>Search</a>
-                </button>
-                <button class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
-                    <a href="subscribe.html">Subscribe</a>
-                </button>
-                <button class="md:hidden" onclick="toggleMobileMenu()" aria-label="Open menu">
-                    <i class="fas fa-bars text-gray-800 text-xl"></i>
-                </button>
-            </div>
-        </nav>
+        </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
-        <section class="max-w-md mx-auto text-center">
-            <h2 class="text-3xl font-bold economist-red-text mb-6">Sign Up with Pi</h2>
-            <p class="text-gray-600 mb-6">Join Trend Forge using your Pi Network account to access exclusive content and make payments.</p>
-            <button id="pi-signup" class="economist-red text-white px-6 py-3 rounded-md hover:bg-red-700 text-lg font-medium">
-                <i class="fas fa-user-plus mr-2"></i> Sign Up with Pi
-            </button>
-            <p class="mt-4 text-gray-600">Already have an account? <a href="login.html" class="economist-red-text hover:underline">Log In</a></p>
+    <main class="container mx-auto px-4 py-8 pt-24 flex justify-center items-center min-h-screen">
+        <section class="bg-white border border-gray-200 rounded-lg shadow-lg p-8 max-w-md w-full">
+            <h2 class="text-3xl font-bold economist-red-text mb-6 text-center">Sign In</h2>
+            <p class="text-gray-600 mb-6 text-center">Sign in with your Pi Network account to access premium content and personalized features.</p>
+            <div class="flex justify-center mb-4">
+                <button id="pi-signin" class="economist-red text-white px-6 py-3 rounded-sm hover:bg-red-700 btn-animated flex items-center" aria-label="Sign in with Pi">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Sign In with Pi
+                </button>
+            </div>
+            <p class="text-sm text-gray-500 text-center">Don't have a Pi account? <a href="https://minepi.com/" class="economist-red-text hover:underline">Learn more</a>.</p>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-black text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -93,7 +131,7 @@
                     <h3 class="text-2xl font-bold mb-4 economist-red-text"><a href="index.html">Trend Forge</a></h3>
                     <p class="text-gray-300 mb-4">Global insights, powered by <a href="pinetwork.html" class="economist-red-text hover:underline">Pi Network</a>.</p>
                     <div class="flex space-x-4">
-                        <a href="subscribe.html" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700 inline-flex items-center">
+                        <a href="subscribe.html" class="economist-red text-white px-4 py-2 rounded-sm hover:bg-red-700 btn-animated inline-flex items-center">
                             <i class="fas fa-arrow-right mr-2"></i> Subscribe Now
                         </a>
                     </div>
@@ -101,20 +139,13 @@
                 <div>
                     <h3 class="text-xl font-bold mb-4 text-gray-100">Explore</h3>
                     <ul class="space-y-2 mb-4">
-                        <li><a href="world.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-globe mr-2"></i> World</a></li>
-                        <li><a href="business.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-briefcase mr-2"></i> Business</a></li>
-                        <li><a href="finance.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-coins mr-2"></i> Finance</a></li>
-                        <li><a href="science.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-flask mr-2"></i> Science</a></li>
-                        <li><a href="culture.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-palette mr-2"></i> Culture</a></li>
+                        <li><a href="world-in-brief.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-globe mr-2"></i> The world in brief</a></li>
+                        <li><a href="pi-ad-network.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-ad mr-2"></i> Pi Ad Network</a></li>
+                        <li><a href="1843-magazine.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-book mr-2"></i> 1843 magazine</a></li>
+                        <li><a href="podcasts.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-podcast mr-2"></i> Podcasts</a></li>
+                        <li><a href="video.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-video mr-2"></i> Video</a></li>
+                        <li><a href="newsletters.html" class="text-gray-300 hover:economist-red-text"><i class="fas fa-envelope mr-2"></i> Newsletters</a></li>
                     </ul>
-                    <div class="flex space-x-4">
-                        <a href="subscribe.html" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 inline-flex items-center">
-                            <i class="fas fa-arrow-right mr-2"></i> Subscribe
-                        </a>
-                        <a href="search.html" class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 inline-flex items-center">
-                            <i class="fas fa-search mr-2"></i> Search
-                        </a>
-                    </div>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-4 text-gray-100">Support</h3>
@@ -134,35 +165,18 @@
                                 <li><a href="security.html" class="text-gray-300 hover:economist-red-text">Security</a></li>
                             </ul>
                         </div>
-                        <div>
-                            <h4 class="text-sm font-semibold text-gray-400">Community</h4>
-                            <ul class="space-y-2 mt-2">
-                                <li><a href="faq.html" class="text-gray-300 hover:economist-red-text">FAQ</a></li>
-                                <li><a href="contribute.html" class="text-gray-300 hover:economist-red-text">Contribute</a></li>
-                                <li><a href="code_of_conduct.html" class="text-gray-300 hover:economist-red-text">Code of Conduct</a></li>
-                                <li><a href="docs.html" class="text-gray-300 hover:economist-red-text">Documentation</a></li>
-                                <li><a href="license.html" class="text-gray-300 hover:economist-red-text">License</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 <div>
                     <h3 class="text-xl font-bold mb-4 text-gray-100">Connect</h3>
-                    <form class="mb-6 flex space-x-2" aria-label="Newsletter Signup">
-                        <label for="email" class="sr-only">Email address</label>
-                        <input type="email" id="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none" required>
-                        <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700">
-                            <i class="fas fa-envelope"></i>
-                        </button>
-                    </form>
                     <div class="flex space-x-4 mb-6">
-                        <a href="https://twitter.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="https://facebook.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://linkedin.com/company/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://instagram.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://twitter.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://linkedin.com/company/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/trendforge" class="text-gray-300 hover:economist-red-text text-xl btn-animated" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                     <p class="text-gray-300"><i class="fas fa-envelope mr-2"></i> <a href="mailto:contact@trendforge.com" class="hover:economist-red-text">contact@trendforge.com</a></p>
-                    <p class="text-gray-300 mt-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Global News Ave, World City</p>
+                    <p class="text-gray-300 mt-2"><i class="fas fa-map-marker-alt mr-2"></i> Silicon Valley, CA, USA</p>
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
@@ -171,99 +185,95 @@
         </div>
     </footer>
 
-    <!-- Mobile Menu -->
-    <div class="fixed inset-0 bg-gray-800 bg-opacity-75 hidden z-50" id="mobile-menu" aria-hidden="true">
-        <div class="bg-white h-full w-80 p-6 shadow-lg">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-2xl font-bold economist-red-text">Trend Forge</h2>
-                <button class="text-gray-800 focus:outline-none" onclick="toggleMobileMenu()" aria-label="Close menu">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
-            </div>
-            <nav class="space-y-2" role="navigation" aria-label="Mobile navigation">
-                <a href="index.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Home</a>
-                <a href="world.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">World</a>
-                <a href="business.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Business</a>
-                <a href="finance.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Finance</a>
-                <a href="science.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Science</a>
-                <a href="culture.html" class="block text-gray-800 hover:economist-red-text font-medium py-2 px-4 rounded-md menu-item">Culture</a>
-                <a href="subscribe.html" class="block economist-red-text font-medium py-2 px-4 rounded-md menu-item">Subscribe</a>
-                <a href="signin.html" class="block economist-red-text font-medium py-2 px-4 rounded-md menu-item">Sign Up</a>
-                <a href="login.html" class="block economist-red-text font-medium py-2 px-4 rounded-md menu-item">Log In</a>
-            </nav>
-            <div class="mt-6">
-                <form class="flex space-x-2" action="search.html" aria-label="Mobile search">
-                    <input type="text" placeholder="Search..." class="flex-1 px-4 py-2 rounded-md text-gray-800 focus:outline-none border border-gray-300" aria-label="Search input">
-                    <button type="submit" class="economist-red text-white px-4 py-2 rounded-md hover:bg-red-700" aria-label="Search">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </div>
-            <div class="mt-6 flex space-x-4">
-                <a href="https://twitter.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
-                <a href="https://facebook.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Facebook"><i class="fab fa-facebook text-xl"></i></a>
-                <a href="https://linkedin.com/company/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="LinkedIn"><i class="fab fa-linkedin text-xl"></i></a>
-                <a href="https://instagram.com/trendforge" class="text-gray-600 hover:economist-red-text" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function isPiSDKAvailable() {
-            return typeof Pi !== 'undefined';
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Utility Functions
+            const showNotification = (message, isError = false) => {
+                const div = document.createElement('div');
+                div.className = `notification ${isError ? 'bg-red-600' : 'bg-green-600'}`;
+                div.textContent = message;
+                document.body.appendChild(div);
+                setTimeout(() => div.remove(), 3000);
+            };
 
-        if (isPiSDKAvailable()) {
-            Pi.init({ version: "2.0", sandbox: true });
-        } else {
-            console.warn('Pi SDK not available. Please open this page in the Pi Network app.');
-            alert('Please open this page in the Pi Network app to sign up.');
-        }
-
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('open');
-            menu.setAttribute('aria-hidden', !menu.classList.contains('hidden'));
-        }
-
-        document.querySelector('.fa-bars').parentElement.addEventListener('click', toggleMobileMenu);
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !document.getElementById('mobile-menu').classList.contains('hidden')) {
-                toggleMobileMenu();
-            }
-        });
-
-        const scopes = ['payments', 'username'];
-
-        function authenticateWithPi(action) {
-            if (!isPiSDKAvailable()) {
-                alert('Please open this page in the Pi Network app to sign up.');
-                return;
-            }
-            Pi.authenticate(scopes)
-                .then(function(auth) {
-                    console.log('Sign Up successful!', auth);
-                    const message = `Welcome, ${auth.user.username}! Your account has been created!`;
-                    alert(message);
-                    $.post('/auth/track', { 
-                        username: auth.user.username, 
-                        action: 'signup' 
-                    });
-                    window.location.href = 'index.html'; // Redirect to home after signup
-                })
-                .catch(function(error) {
-                    console.error('Sign Up failed:', error);
-                    alert('Sign Up failed: ' + error.message);
+            // Pi SDK Initialization
+            const isPiSDKAvailable = () => typeof Pi !== 'undefined';
+            if (isPiSDKAvailable()) {
+                Pi.init({ version: "2.0", sandbox: true }).catch(error => {
+                    console.error('Pi SDK initialization failed:', error);
+                    showNotification('Failed to initialize Pi SDK. Please open in Pi Browser.', true);
                 });
-        }
+            } else {
+                console.warn('Pi SDK not available.');
+                showNotification('Please open in the Pi Browser for authentication.', true);
+            }
 
-        document.getElementById('pi-signup').addEventListener('click', () => {
-            authenticateWithPi('signup');
+            // Authentication
+            const scopes = ['payments', 'username'];
+            let isAuthenticating = false;
+            const onIncompletePaymentFound = (payment) => {
+                console.log('Incomplete payment:', payment);
+                showNotification('Incomplete payment detected. Please try again.', true);
+            };
+
+            const checkAuthentication = async () => {
+                if (isAuthenticating || !isPiSDKAvailable()) return;
+                isAuthenticating = true;
+                try {
+                    const auth = await Pi.authenticate(scopes, onIncompletePaymentFound);
+                    localStorage.setItem('pi_username', auth.user.username);
+                    localStorage.setItem('pi_accessToken', auth.accessToken);
+                    showNotification('Signed in successfully!');
+
+                    // Track authentication with backend
+                    $.post('/api/auth/track', { username: auth.user.username, action: 'signin' })
+                        .fail(() => console.error('Failed to track authentication.'));
+
+                    // Redirect to intended URL or homepage
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const redirectUrl = urlParams.get('redirect') || 'index.html';
+                    window.location.href = redirectUrl;
+                } catch (error) {
+                    console.error('Authentication failed:', error);
+                    showNotification('Authentication failed. Please try again.', true);
+                } finally {
+                    isAuthenticating = false;
+                }
+            };
+
+            // Event Listeners
+            document.getElementById('pi-signin').addEventListener('click', checkAuthentication);
+
+            // Scroll Effect for Header
+            window.addEventListener('scroll', () => {
+                document.querySelector('header').classList.toggle('scrolled', window.scrollY > 20);
+            });
+
+            // Accessibility: Focus Trap for Sign-In Section
+            const trapFocus = (container, e) => {
+                const focusable = container.querySelectorAll('a, button');
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if (e.key === 'Tab') {
+                    if (e.shiftKey && document.activeElement === first) {
+                        e.preventDefault();
+                        last.focus();
+                    } else if (!e.shiftKey && document.activeElement === last) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
+            };
+            document.querySelector('section').addEventListener('keydown', (e) => trapFocus(document.querySelector('section'), e));
+
+            // Escape Key Handler
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    window.location.href = 'index.html';
+                }
+            });
         });
     </script>
 </body>
