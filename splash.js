@@ -1,17 +1,40 @@
-// Wait for the DOM to load
+// splash.js
 document.addEventListener('DOMContentLoaded', () => {
-    // Get the splash container
     const splash = document.getElementById('splash');
+    if (!splash) {
+        console.warn('Splash screen element not found.');
+        return;
+    }
 
-    // Set a timeout to fade out and redirect
-    setTimeout(() => {
-        // Add fade-out effect
-        splash.style.transition = 'opacity 0.5s ease';
-        splash.style.opacity = '0';
+    // Prevent scrolling while splash is visible
+    document.body.style.overflow = 'hidden';
 
-        // Redirect to index.html after fade-out
+    // Ensure splash is visible
+    splash.style.opacity = '1';
+
+    // Remove splash screen when page is fully loaded or after timeout
+    const removeSplash = () => {
+        splash.classList.add('hidden');
         setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 500); // Wait for fade-out to complete
-    }, 3000); // Show splash for 3 seconds
+            splash.remove();
+            document.body.style.overflow = '';
+            console.log('Splash screen removed');
+        }, 500); // Match CSS transition duration
+    };
+
+    // Check if page is fully loaded
+    const checkPageLoad = () => {
+        if (document.readyState === 'complete') {
+            removeSplash();
+        }
+    };
+
+    // Remove splash after 3 seconds or when page is loaded
+    setTimeout(removeSplash, 3000);
+    window.addEventListener('load', checkPageLoad);
+
+    // Fallback: Remove splash if images/scripts take too long
+    document.addEventListener('load', () => {
+        setTimeout(checkPageLoad, 1000);
+    }, true);
 });
