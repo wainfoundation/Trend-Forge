@@ -2,28 +2,149 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Trend Forge</title>
-    <!-- Tailwind CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Trend Forge - Global Insights</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts to mimic Economist's typography -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Roboto:wght@400;500;700&display=swap">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+        :root {
+            --economist-red: #e3120b;
+            --economist-dark-red: #c81009;
+            --menu-transition: all 0.3s ease-in-out;
+            --animation-delay: 0.1s;
+        }
         body {
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
+            overflow-x: hidden;
+            margin: 0;
+            background-color: #f9fafb;
         }
-        h1, h2, h3 {
-            font-family: 'Roboto Slab', serif;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'PT Serif', serif;
+        }
+        .economist-red {
+            background-color: var(--economist-red);
         }
         .economist-red-text {
-            color: #e3120b; /* Economist's signature red */
+            color: var(--economist-red);
+        }
+        /* Header Styles */
+        header {
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        /* Hamburger Menu */
+        .hamburger {
+            width: 28px;
+            height: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .hamburger span {
+            background: #1f2937;
+            height: 3px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            border-radius: 1px;
+        }
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100%;
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            transition: left 0.4s ease-in-out;
+            z-index: 50;
+            display: none;
+        }
+        #mobile-menu.open {
+            left: 0;
+            display: block;
+        }
+        #mobile-menu .menu-item {
+            display: flex;
+            align-items: center;
+            min-height: 48px;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1f2937;
+            background: #f9fafb;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            margin: 0.25rem 0;
+        }
+        #mobile-menu .menu-item:hover,
+        #mobile-menu .menu-item:focus {
+            background-color: #e5e7eb;
+            transform: translateX(4px);
+        }
+        .submenu {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            background: #f9fafb;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+            transition: max-height 0.4s ease, opacity 0.4s ease;
+        }
+        .submenu.open {
+            max-height: 1000px;
+            opacity: 1;
+            padding: 0.5rem 0;
+        }
+        .submenu-item {
+            display: block;
+            padding: 0.75rem 2rem;
+            font-size: 0.95rem;
+            color: #4b5563;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .submenu-item:hover,
+        .submenu-item:focus {
+            background-color: #e5e7eb;
+            color: var(--economist-red);
+        }
+        /* Splash Screen Styles */
+        #splash {
+            position: fixed;
+            inset: 0;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        #splash.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
         .spinner {
             border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #e3120b;
+            border-left-color: var(--economist-red);
             border-radius: 50%;
             width: 40px;
             height: 40px;
@@ -32,17 +153,162 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        /* Accessibility */
+        :focus-visible {
+            outline: 2px solid var(--economist-red);
+            outline-offset: 2px;
+        }
     </style>
 </head>
-<body class="bg-white flex items-center justify-center min-h-screen">
-    <!-- Splash Screen Content -->
-    <div id="splash" class="text-center space-y-6">
-        <h1 class="text-5xl font-bold economist-red-text">Trend Forge</h1>
-        <p class="text-lg text-gray-600">In-depth analysis and global insights</p>
-        <div class="spinner mx-auto"></div>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash">
+        <div class="text-center space-y-6">
+            <h1 class="text-5xl font-bold economist-red-text">Trend Forge</h1>
+            <p class="text-lg text-gray-600">In-depth analysis and global insights</p>
+            <div class="spinner mx-auto"></div>
+        </div>
     </div>
 
-    <!-- JavaScript -->
+    <header class="fixed top-0 w-full z-40">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <h1 class="text-2xl font-bold economist-red-text">Trend Forge</h1>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="mobile-search-toggle" class="lg:hidden text-gray-800 p-2 hover:economist-red-text" aria-label="Toggle search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="hamburger lg:hidden" aria-label="Toggle menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav id="mobile-menu" aria-hidden="true" aria-labelledby="mobile-menu-title">
+        <div class="h-full p-4 overflow-y-auto flex flex-col">
+            <div class="sticky top-0 z-10 bg-white/80 backdrop-blur-sm py-3 px-4 flex justify-between items-center border-b border-gray-200">
+                <a href="index.html" class="text-2xl font-bold economist-red-text flex items-center">
+                    <i class="fas fa-fire mr-2"></i> Trend Forge
+                </a>
+                <button class="menu-close text-gray-800 focus:outline-none focus:ring-2 focus:ring-red-500 rounded p-2 hover:bg-gray-100" aria-label="Close menu">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-2 flex-1 mt-4">
+                <a href="world-in-brief.html" class="menu-item">World in Brief</a>
+                <div class="submenu-wrapper">
+                    <button class="menu-item toggle-submenu" aria-expanded="false" aria-controls="mobile-world-submenu">
+                        <i class="fas fa-globe mr-2"></i> World <i class="fas fa-chevron-down ml-auto text-sm"></i>
+                    </button>
+                    <div id="mobile-world-submenu" class="submenu" aria-hidden="true">
+                        <button class="submenu-back text-gray-800 font-semibold py-2 px-8 flex items-center hover:bg-gray-100">
+                            <i class="fas fa-arrow-left mr-2"></i> Back
+                        </button>
+                        <a href="world.html#this-week" class="submenu-item">The World This Week</a>
+                        <a href="world.html#china" class="submenu-item">China</a>
+                    </div>
+                </div>
+                <a href="business.html" class="menu-item">Business</a>
+            </div>
+            <div aria-live="polite" class="sr-only" id="menu-announcer"></div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 pt-24">
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold economist-red-text mb-6">Welcome</h2>
+            <p>Main content goes here...</p>
+        </section>
+    </main>
+
+    <!-- Standalone Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.getElementById('mobile-menu');
+            const closeButton = document.querySelector('.menu-close');
+            let isMenuToggling = false;
+
+            const toggleMobileMenu = () => {
+                if (isMenuToggling) return;
+                isMenuToggling = true;
+                console.log('Toggling mobile menu');
+                menu.classList.toggle('open');
+                hamburger.classList.toggle('open');
+                menu.setAttribute('aria-hidden', !menu.classList.contains('open'));
+                document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+                const announcer = document.getElementById('menu-announcer');
+                announcer.textContent = menu.classList.contains('open') ? 'Mobile menu opened' : 'Mobile menu closed';
+                if (menu.classList.contains('open')) {
+                    menu.querySelector('a, button')?.focus();
+                }
+                setTimeout(() => isMenuToggling = false, 400);
+            };
+
+            if (hamburger && menu && closeButton) {
+                hamburger.addEventListener('click', toggleMobileMenu);
+                hamburger.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    toggleMobileMenu();
+                });
+                closeButton.addEventListener('click', toggleMobileMenu);
+                console.log('Mobile menu event listeners attached');
+            } else {
+                console.error('Mobile menu elements not found');
+            }
+
+            // Submenu Toggle
+            document.querySelectorAll('.toggle-submenu').forEach(button => {
+                button.addEventListener('click', () => {
+                    const submenu = document.getElementById(button.getAttribute('aria-controls'));
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    submenu.classList.toggle('open');
+                    submenu.setAttribute('aria-hidden', isExpanded);
+                    const announcer = document.getElementById('menu-announcer');
+                    announcer.textContent = isExpanded ? 'Submenu collapsed' : 'Submenu expanded';
+                });
+            });
+
+            document.querySelectorAll('.submenu-back').forEach(button => {
+                button.addEventListener('click', () => {
+                    const submenu = button.closest('.submenu');
+                    const toggleButton = submenu.parentElement.querySelector('.toggle-submenu');
+                    toggleButton.click();
+                    toggleButton.focus();
+                });
+            });
+
+            // Focus Trap for Mobile Menu
+            const focusableElements = menu.querySelectorAll('a, button');
+            const firstFocusable = focusableElements[0];
+            const lastFocusable = focusableElements[focusableElements.length - 1];
+            menu.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab' && menu.classList.contains('open')) {
+                    if (e.shiftKey && document.activeElement === firstFocusable) {
+                        e.preventDefault();
+                        lastFocusable.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+                        e.preventDefault();
+                        firstFocusable.focus();
+                    }
+                }
+                if (e.key === 'Escape' && menu.classList.contains('open')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+    </script>
+
+    <!-- Splash Screen Script -->
     <script src="splash.js"></script>
 </body>
 </html>
