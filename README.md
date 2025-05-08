@@ -259,7 +259,7 @@ We follow a respectful and inclusive [Code of Conduct](frontend/code_of_conduct.
 
 ## License
 
-MIT License. See [license.html](frontend/license.html).
+MIT License. See [license.html](frontend/LICENSE.html).
 
 ## Contact
 
